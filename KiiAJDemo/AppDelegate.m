@@ -492,14 +492,26 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     if([userInfo[@"t"] isEqualToString:@"DATA_OBJECT_CREATED"]) {
         
         NSString *bucket = userInfo[@"bi"];
+        NSString *itemID = userInfo[@"oi"];
         
+        [[KiiObject objectWithURI:[NSString stringWithFormat:@"kiicloud://buckets/%@/objects/%@", bucket, itemID]] refreshWithBlock:^(KiiObject *object, NSError *error) {
+            if(error == nil) {
+                
+                [object describe];
 
-        if([bucket isEqualToString:@"messages"]) {
-            
-            // add it to our log
-            
-            // kick it over to the pi
-        }
+                if([bucket isEqualToString:@"messages"]) {
+                    
+                    // add it to our log
+                    
+                    // kick it over to the pi
+                    [self sendNotification:[object getObjectForKey:@"body"]];
+                }
+
+            } else {
+                NSLog(@"error retrieving kiiobject: %@", error);
+            }
+        }];
+
         
     }
 
@@ -517,14 +529,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 
 
 // Send a notification
-- (void) sendNotification
+- (void) sendNotification:(NSString*)message
 {
     NSString *nsender = @"iosTestApp";
     
     NSString *curr_controlPanelServiceObjectPath = @"";
     
     self.notification = [[AJNSNotification alloc] initWithMessageType:INFO
-                                                  andNotificationText:@[[[AJNSNotificationText alloc] initWithLang:@"en" andText:@"Test message"]]];
+                                                  andNotificationText:[NSMutableArray arrayWithObject:[[AJNSNotificationText alloc] initWithLang:@"en" andText:message]]];
     
     // This is an exaple of using AJNSNotification setters :
     [self.notification setMessageId:-1];

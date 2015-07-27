@@ -15,7 +15,7 @@
 @property (strong, nonatomic) AJSVCGenericLoggerDefaultImpl *logger;
 
 + (AppDelegate*) sharedDelegate;
-- (void) sendNotification;
+- (void) sendNotification:(NSString*)message;
 
 @end
 
