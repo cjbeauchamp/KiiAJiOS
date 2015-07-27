@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */; };
+		164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */; };
 		16B7A9B01B668AD20067C951 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9AF1B668AD20067C951 /* main.m */; };
 		16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B21B668AD20067C951 /* AppDelegate.m */; };
 		16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B51B668AD20067C951 /* FirstViewController.m */; };
@@ -51,6 +53,8 @@
 		164D4B571B669290005E5FDC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../Frameworks/openssl/build/libcrypto.a; sourceTree = "<group>"; };
 		164D4B581B669290005E5FDC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../Frameworks/openssl/build/libssl.a; sourceTree = "<group>"; };
 		164D4B5B1B6692C5005E5FDC /* BundledRouter.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BundledRouter.o; path = "../../Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib/BundledRouter.o"; sourceTree = "<group>"; };
+		164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KiiSDK.framework; sourceTree = "<group>"; };
+		164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		16B7A9AA1B668AD20067C951 /* KiiAJDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiiAJDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B7A9AE1B668AD20067C951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16B7A9AF1B668AD20067C951 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */,
 				16B7A9F31B668E730067C951 /* UIKit.framework in Frameworks */,
 				16B7A9E31B668C470067C951 /* libc++.dylib in Frameworks */,
 				16B7A9E11B668C400067C951 /* libc++.1.dylib in Frameworks */,
@@ -110,6 +115,7 @@
 				16B7A9E71B668D070067C951 /* liballjoyn_about_cpp.a in Frameworks */,
 				16B7A9E91B668D380067C951 /* liballjoyn_services_common_objc.a in Frameworks */,
 				16B7A9ED1B668D5C0067C951 /* libAllJoynFramework_iOS.a in Frameworks */,
+				164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */,
 				16B7A9EB1B668D4B0067C951 /* liballjoyn_about_objc.a in Frameworks */,
 				16B7A9EF1B668D6D0067C951 /* liballjoyn_notification_cpp.a in Frameworks */,
 				16B7A9F11B668D780067C951 /* liballjoyn_notification_objc.a in Frameworks */,
@@ -192,6 +198,8 @@
 		16B7A9F41B668F1D0067C951 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */,
+				164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */,
 				164D4B5B1B6692C5005E5FDC /* BundledRouter.o */,
 				164D4B571B669290005E5FDC /* libcrypto.a */,
 				164D4B581B669290005E5FDC /* libssl.a */,
@@ -462,6 +470,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -484,10 +496,10 @@
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/lib",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/about/lib",
 					/Users/chrisbeauchamp/Code/Frameworks/openssl/build,
-					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib\"",
-					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib\"",
-					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/objc/lib\"",
-					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/cpp/lib\"",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/objc/lib",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/cpp/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -513,6 +525,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import <KiiSDK/Kii.h>
+
 @interface AppDelegate ()
 
 @end
@@ -19,6 +21,10 @@
 
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
+    [Kii beginWithID:@"a17d7075"
+              andKey:@"e77400572e8db7cbd755ea63e06d623e"
+             andSite:kiiSiteUS];
+    
     return YES;
 }
 
