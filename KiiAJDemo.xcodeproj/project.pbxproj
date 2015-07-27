@@ -10,7 +10,6 @@
 		164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */; };
 		164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */; };
 		164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D4B621B66B9F6005E5FDC /* NotificationViewController.m */; };
-		164D4B661B66BC19005E5FDC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D4B641B66BC19005E5FDC /* MainViewController.m */; };
 		16B7A9B01B668AD20067C951 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9AF1B668AD20067C951 /* main.m */; };
 		16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B21B668AD20067C951 /* AppDelegate.m */; };
 		16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B51B668AD20067C951 /* FirstViewController.m */; };
@@ -35,8 +34,6 @@
 		16B7A9F31B668E730067C951 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9F21B668E730067C951 /* UIKit.framework */; };
 		16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F71B668FA40067C951 /* DetailsCell.m */; };
 		16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F91B668FA40067C951 /* NotificationEntry.m */; };
-		16B7AA041B668FA40067C951 /* ProducerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9FB1B668FA40067C951 /* ProducerViewController.m */; };
-		16B7AA061B668FA40067C951 /* ConsumerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */; };
 		16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16B7AA011B668FA40067C951 /* NotificationUtils.mm */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +55,6 @@
 		164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		164D4B611B66B9F6005E5FDC /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		164D4B621B66B9F6005E5FDC /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
-		164D4B641B66BC19005E5FDC /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		164D4B651B66BC19005E5FDC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		16B7A9AA1B668AD20067C951 /* KiiAJDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiiAJDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B7A9AE1B668AD20067C951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16B7A9AF1B668AD20067C951 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,10 +88,6 @@
 		16B7A9F71B668FA40067C951 /* DetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsCell.m; sourceTree = "<group>"; };
 		16B7A9F81B668FA40067C951 /* NotificationEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationEntry.h; sourceTree = "<group>"; };
 		16B7A9F91B668FA40067C951 /* NotificationEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationEntry.m; sourceTree = "<group>"; };
-		16B7A9FA1B668FA40067C951 /* ProducerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProducerViewController.h; sourceTree = "<group>"; };
-		16B7A9FB1B668FA40067C951 /* ProducerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducerViewController.m; sourceTree = "<group>"; };
-		16B7A9FE1B668FA40067C951 /* ConsumerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumerViewController.h; sourceTree = "<group>"; };
-		16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumerViewController.m; sourceTree = "<group>"; };
 		16B7AA001B668FA40067C951 /* NotificationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationUtils.h; sourceTree = "<group>"; };
 		16B7AA011B668FA40067C951 /* NotificationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NotificationUtils.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,16 +219,10 @@
 		16B7A9F51B668F9A0067C951 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				164D4B641B66BC19005E5FDC /* MainViewController.m */,
-				164D4B651B66BC19005E5FDC /* MainViewController.h */,
 				16B7A9F61B668FA40067C951 /* DetailsCell.h */,
 				16B7A9F71B668FA40067C951 /* DetailsCell.m */,
 				16B7A9F81B668FA40067C951 /* NotificationEntry.h */,
 				16B7A9F91B668FA40067C951 /* NotificationEntry.m */,
-				16B7A9FA1B668FA40067C951 /* ProducerViewController.h */,
-				16B7A9FB1B668FA40067C951 /* ProducerViewController.m */,
-				16B7A9FE1B668FA40067C951 /* ConsumerViewController.h */,
-				16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */,
 				16B7AA001B668FA40067C951 /* NotificationUtils.h */,
 				16B7AA011B668FA40067C951 /* NotificationUtils.mm */,
 				164D4B611B66B9F6005E5FDC /* NotificationViewController.h */,
@@ -345,15 +330,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				164D4B661B66BC19005E5FDC /* MainViewController.m in Sources */,
 				16B7A9B91B668AD20067C951 /* SecondViewController.m in Sources */,
 				16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */,
 				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
 				16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */,
-				16B7AA061B668FA40067C951 /* ConsumerViewController.m in Sources */,
 				164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */,
 				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
-				16B7AA041B668FA40067C951 /* ProducerViewController.m in Sources */,
 				16B7A9B01B668AD20067C951 /* main.m in Sources */,
 				16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */,
 			);

@@ -17,21 +17,20 @@
 
 #import "NotificationEntry.h"
 #import "NotificationUtils.h"
-
+#import "AppDelegate.h"
+#import "alljoyn/services_common/AJSVCGenericLoggerDefaultImpl.h"
 
 @interface NotificationEntry ()
 @property (strong, nonatomic) AJNSNotification *ajnsNotification;
-@property (weak,nonatomic) ConsumerViewController *consumerViewController;
 
 @end
 
 @implementation NotificationEntry
 
-- (id)initWithAJNSNotification:(AJNSNotification *) ajnsNotification andConsumerViewController:(ConsumerViewController *)consumerViewController
+- (id)initWithAJNSNotification:(AJNSNotification *) ajnsNotification
 {
     self = [super init];
     if (self) {
-        self.consumerViewController = consumerViewController;
         self.ajnsNotification = ajnsNotification;
     }
     return self;
@@ -46,7 +45,6 @@
     //show AJNSNotification on self.notificationTextView
     NSString *nstr = @"";
     NSString *lang;
-    bool matchLangFlag = false;
     
     nstr = [nstr stringByAppendingString:[AJNSNotificationEnums AJNSMessageTypeToString:[ajnsNotification messageType]]];
     nstr = [nstr stringByAppendingFormat:@" "];
@@ -54,22 +52,11 @@
     // get the msg NotificationText
 
     for (AJNSNotificationText *nt in ajnsNotification.ajnsntArr) {
-        lang = [nt getLanguage];
-        if ([lang isEqualToString:self.consumerViewController.consumerLang]) {
-            nstr = [nstr stringByAppendingString:lang];
-            nstr = [nstr stringByAppendingFormat:@": "];
-            nstr = [nstr stringByAppendingString:[nt getText]];
-            nstr = [nstr stringByAppendingFormat:@" "];
-            matchLangFlag = true;
-        }
+        nstr = [nstr stringByAppendingString:lang];
+        nstr = [nstr stringByAppendingFormat:@": "];
+        nstr = [nstr stringByAppendingString:[nt getText]];
+        nstr = [nstr stringByAppendingFormat:@" "];
     } //for
-    
-    if (!matchLangFlag) {
-        nstr = [nstr stringByAppendingString:[NSString stringWithFormat:@"\nUnknown language(s) in notification,\n the last one was '%@'",lang]];
-        self.text = nstr;
-        [self.consumerViewController.logger debugTag:[[self class] description] text:@"The received message lang does not match the consumer lang settings"];
-        return;
-    }
     
     // get the msg NotificationText
     NSString *richIconUrl = [ajnsNotification richIconUrl];
@@ -83,18 +70,16 @@
     [ajnsNotification richAudioUrl:richAudioUrlArray];
     int i = 0;
     for (int x = 0; x != [richAudioUrlArray count]; x++) {
-        [self.consumerViewController.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"%d", i]];
+        [[AppDelegate sharedDelegate].logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"%d", i]];
         i++;
         NSString *lang = [(AJNSRichAudioUrl *)[richAudioUrlArray objectAtIndex:x] language];
         NSString *audiourl = [(AJNSRichAudioUrl *)[richAudioUrlArray objectAtIndex:x] url];
-        [self.consumerViewController.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"lang[%@]", lang]];
-        [self.consumerViewController.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"audiourl[%@]", audiourl]];
-        if ([lang isEqualToString:(self.consumerViewController.consumerLang)]) {
-            nstr = [nstr stringByAppendingFormat:@"\naudio: %@", audiourl];
-        }
+        [[AppDelegate sharedDelegate].logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"lang[%@]", lang]];
+        [[AppDelegate sharedDelegate].logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"audiourl[%@]", audiourl]];
+        nstr = [nstr stringByAppendingFormat:@"\naudio: %@", audiourl];
     } //for
     
-    [self.consumerViewController.logger debugTag:[[self class] description] text:([NSString stringWithFormat:@"Adding notification to view:\n %@", nstr])];
+    [[AppDelegate sharedDelegate].logger debugTag:[[self class] description] text:([NSString stringWithFormat:@"Adding notification to view:\n %@", nstr])];
     
     
     self.text = nstr;

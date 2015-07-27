@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class AJSVCGenericLoggerDefaultImpl;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) AJSVCGenericLoggerDefaultImpl *logger;
 
++ (AppDelegate*) sharedDelegate;
+- (void) sendNotification;
 
 @end
 

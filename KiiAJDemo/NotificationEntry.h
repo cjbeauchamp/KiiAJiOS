@@ -16,7 +16,6 @@
 
 #import <Foundation/Foundation.h>
 #import "alljoyn/notification/AJNSNotification.h"
-#import "ConsumerViewController.h"
 
 @interface NotificationEntry : NSObject
 @property (strong, nonatomic) NSString *text;
@@ -24,5 +23,6 @@
 @property (nonatomic) BOOL chosen;
 @property (strong, nonatomic,readonly) AJNSNotification *ajnsNotification;
 
-- (id)initWithAJNSNotification:(AJNSNotification *) ajnsNotification andConsumerViewController:(ConsumerViewController *)consumerViewController;
+- (id)initWithAJNSNotification:(AJNSNotification *) ajnsNotification;
+
 @end

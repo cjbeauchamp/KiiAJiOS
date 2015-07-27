@@ -14,8 +14,11 @@
 #import "AJNPasswordManager.h"
 #import "alljoyn/notification/AJNSNotificationSender.h"
 #import "alljoyn/notification/AJNSNotificationService.h"
+#import "alljoyn/notification/AJNSNotificationReceiver.h"
 #import "alljoyn/services_common/AJSVCGenericLoggerUtil.h"
+#import "alljoyn/controlpanel/AJCPSGetControlPanelViewController.h"
 #import "NotificationUtils.h"
+#import "AppDelegate.h"
 
 static NSString * const DEVICE_ID_PRODUCER= @"ProducerBasic";
 static NSString * const DEVICE_NAME_PRODUCER= @"ProducerBasic";
@@ -284,7 +287,7 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
         
         return;
     }
-    
+
     // Set other lang message
     if ([NotificationUtils textFieldIsValid:self.notificationLangTextField.text] && self.otherLang) {
         NSString *langNotificationText;
@@ -347,7 +350,6 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
         [self.notification setRichIconObjectPath:RICH_ICON_OBJECT_PATH];
         [self.notification setRichAudioObjectPath:RICH_AUDIO_OBJECT_PATH];
         [self.notification setControlPanelServiceObjectPath:curr_controlPanelServiceObjectPath];
-        
         
         [self logNotification:self.notification ttl:nttl];
         
@@ -632,6 +634,13 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
             [(UITextField *)aSubview resignFirstResponder];
         }
     }
+}
+
+
+
+- (IBAction) sendNotification:(id)sender
+{
+    [[AppDelegate sharedDelegate] sendNotification];
 }
 
 @end
