@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class AJSVCGenericLoggerDefaultImpl;
+@class AJSVCGenericLoggerDefaultImpl, NotificationViewController;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AJSVCGenericLoggerDefaultImpl *logger;
+@property (strong, nonatomic) NSMutableArray *notificationEntries;
+@property (strong, nonatomic) NotificationViewController *notificationVC;
 
 + (AppDelegate*) sharedDelegate;
 - (void) sendNotification:(NSString*)message;

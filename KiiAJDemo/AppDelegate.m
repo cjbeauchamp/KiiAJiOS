@@ -20,6 +20,7 @@
 #import "samples_common/AJSCCommonBusListener.h"
 #import "alljoyn/about/AJNAboutServiceApi.h"
 #import "AJNVersion.h"
+#import "NotificationViewController.h"
 
 static NSString * const DEFAULT_APP_NAME = @"DISPLAY_ALL";
 static NSString * const DAEMON_QUIET_PREFIX = @"quiet@"; // For tcl
@@ -49,18 +50,12 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 @property (weak, nonatomic) AJNSNotificationService *consumerService;
 
 @property (strong, nonatomic) UIAlertView *selectConsumerLang;
-@property (strong, nonatomic) NSMutableArray *notificationEntries; // array of NotificationEntry objects
 
 @property (weak, nonatomic) AJNAboutServiceApi *aboutService;
-@property (strong, nonatomic) UIAlertView *selectLanguage;
-@property (strong, nonatomic) UIAlertView *selectMessageType;
 @property (strong, nonatomic) AJNSNotification *notification;
 @property (strong, nonatomic) NSMutableArray *notificationTextArr;
 @property (strong, nonatomic) NSMutableDictionary *customAttributesDictionary;
 @property (strong, nonatomic) NSMutableArray *richAudioUrlArray;
-
-@property (strong, nonatomic) NSString *defaultTTL; // Hold the default ttl as set in the UI
-@property (strong, nonatomic) NSString *defaultMessageType; // Hold the default message type as set in the UI
 
 @property (nonatomic) AJNSNotificationMessageType messageType;
 @property (strong, nonatomic) NSString *otherLang;
@@ -434,6 +429,8 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    self.notificationEntries = [[NSMutableArray alloc] init];
+    
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [Kii beginWithID:@"a17d7075"
@@ -610,59 +607,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     return [self.aboutService registerPort:(SERVICE_PORT)];
 }
 
-- (IBAction)selectLanguagePressed:(UIButton *)sender
-{
-    [self showSelectLanguageAlert];
-}
-
-- (IBAction)selectMessageTypePressed:(UIButton *)sender
-{
-    [self showMessageTypeAlert];
-}
-
-- (void)showSelectLanguageAlert
-{
-    NSArray *langArray = [[NSMutableArray alloc] initWithObjects:@"English", @"Hebrew", @"Russian", nil];
-    
-    self.selectLanguage = [[UIAlertView alloc] initWithTitle:@"Select Language" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    
-    for (NSString *str in langArray) {
-        [self.selectLanguage addButtonWithTitle:str];
-    }
-    
-    [self.selectLanguage show];
-}
-
-- (void)showMessageTypeAlert
-{
-    NSArray *messageTypeArray = [[NSMutableArray alloc] initWithObjects:@"INFO", @"WARNING", @"EMERGENCY", nil];
-    
-    self.selectMessageType = [[UIAlertView alloc] initWithTitle:@"Select Language" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    
-    for (NSString *str in messageTypeArray) {
-        [self.selectMessageType addButtonWithTitle:str];
-    }
-    
-    [self.selectMessageType show];
-}
-
-#pragma mark - Application util methods
-
-- (NSString *)convertToLangCode:(NSString *)value
-{
-    if ([value isEqualToString:@"English"]) {
-        return @"en";
-    }
-    else if ([value isEqualToString:@"Hebrew"]) {
-        return @"he";
-    }
-    else if ([value isEqualToString:@"Russian"]) {
-        return @"ru";
-    }
-    return nil;
-}
-
-
 - (QStatus)startConsumer
 {
     QStatus status;
@@ -773,6 +717,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     [self.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"Received new Notification:\n%@", notificationContent]];
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.notificationEntries addObject:ajnsNotification];
+        [self.notificationVC refreshTable];
+    });
 }
 
 #pragma mark - AJNSNotificationReceiver protocol methods
