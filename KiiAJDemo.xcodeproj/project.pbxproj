@@ -13,7 +13,6 @@
 		16B7A9B91B668AD20067C951 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B81B668AD20067C951 /* SecondViewController.m */; };
 		16B7A9BC1B668AD20067C951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16B7A9BA1B668AD20067C951 /* Main.storyboard */; };
 		16B7A9BE1B668AD20067C951 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16B7A9BD1B668AD20067C951 /* Images.xcassets */; };
-		16B7A9C11B668AD20067C951 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16B7A9BF1B668AD20067C951 /* LaunchScreen.xib */; };
 		16B7A9CD1B668AD20067C951 /* KiiAJDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9CC1B668AD20067C951 /* KiiAJDemoTests.m */; };
 		16B7A9D71B668C1E0067C951 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9D61B668C1E0067C951 /* SystemConfiguration.framework */; };
 		16B7A9DB1B668C300067C951 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9D81B668C2F0067C951 /* libstdc++.6.0.9.dylib */; };
@@ -30,6 +29,12 @@
 		16B7A9EF1B668D6D0067C951 /* liballjoyn_notification_cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9EE1B668D6D0067C951 /* liballjoyn_notification_cpp.a */; };
 		16B7A9F11B668D780067C951 /* liballjoyn_notification_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9F01B668D780067C951 /* liballjoyn_notification_objc.a */; };
 		16B7A9F31B668E730067C951 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B7A9F21B668E730067C951 /* UIKit.framework */; };
+		16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F71B668FA40067C951 /* DetailsCell.m */; };
+		16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F91B668FA40067C951 /* NotificationEntry.m */; };
+		16B7AA041B668FA40067C951 /* ProducerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9FB1B668FA40067C951 /* ProducerViewController.m */; };
+		16B7AA051B668FA40067C951 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9FD1B668FA40067C951 /* MainViewController.m */; };
+		16B7AA061B668FA40067C951 /* ConsumerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */; };
+		16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16B7AA011B668FA40067C951 /* NotificationUtils.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		164D4B571B669290005E5FDC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../Frameworks/openssl/build/libcrypto.a; sourceTree = "<group>"; };
+		164D4B581B669290005E5FDC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../Frameworks/openssl/build/libssl.a; sourceTree = "<group>"; };
+		164D4B5B1B6692C5005E5FDC /* BundledRouter.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BundledRouter.o; path = "../../Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib/BundledRouter.o"; sourceTree = "<group>"; };
 		16B7A9AA1B668AD20067C951 /* KiiAJDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiiAJDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B7A9AE1B668AD20067C951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16B7A9AF1B668AD20067C951 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,7 +62,6 @@
 		16B7A9B81B668AD20067C951 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		16B7A9BB1B668AD20067C951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16B7A9BD1B668AD20067C951 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		16B7A9C01B668AD20067C951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		16B7A9C61B668AD20067C951 /* KiiAJDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiiAJDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B7A9CB1B668AD20067C951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16B7A9CC1B668AD20067C951 /* KiiAJDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiiAJDemoTests.m; sourceTree = "<group>"; };
@@ -73,6 +80,18 @@
 		16B7A9EE1B668D6D0067C951 /* liballjoyn_notification_cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liballjoyn_notification_cpp.a; path = "../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib/liballjoyn_notification_cpp.a"; sourceTree = "<group>"; };
 		16B7A9F01B668D780067C951 /* liballjoyn_notification_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liballjoyn_notification_objc.a; path = "../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib/liballjoyn_notification_objc.a"; sourceTree = "<group>"; };
 		16B7A9F21B668E730067C951 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		16B7A9F61B668FA40067C951 /* DetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsCell.h; sourceTree = "<group>"; };
+		16B7A9F71B668FA40067C951 /* DetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsCell.m; sourceTree = "<group>"; };
+		16B7A9F81B668FA40067C951 /* NotificationEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationEntry.h; sourceTree = "<group>"; };
+		16B7A9F91B668FA40067C951 /* NotificationEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationEntry.m; sourceTree = "<group>"; };
+		16B7A9FA1B668FA40067C951 /* ProducerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProducerViewController.h; sourceTree = "<group>"; };
+		16B7A9FB1B668FA40067C951 /* ProducerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducerViewController.m; sourceTree = "<group>"; };
+		16B7A9FC1B668FA40067C951 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		16B7A9FD1B668FA40067C951 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		16B7A9FE1B668FA40067C951 /* ConsumerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumerViewController.h; sourceTree = "<group>"; };
+		16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumerViewController.m; sourceTree = "<group>"; };
+		16B7AA001B668FA40067C951 /* NotificationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationUtils.h; sourceTree = "<group>"; };
+		16B7AA011B668FA40067C951 /* NotificationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NotificationUtils.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,23 +130,9 @@
 		16B7A9A11B668AD20067C951 = {
 			isa = PBXGroup;
 			children = (
-				16B7A9F21B668E730067C951 /* UIKit.framework */,
-				16B7A9F01B668D780067C951 /* liballjoyn_notification_objc.a */,
-				16B7A9EE1B668D6D0067C951 /* liballjoyn_notification_cpp.a */,
-				16B7A9EC1B668D5C0067C951 /* libAllJoynFramework_iOS.a */,
-				16B7A9EA1B668D4B0067C951 /* liballjoyn_about_objc.a */,
-				16B7A9E81B668D380067C951 /* liballjoyn_services_common_objc.a */,
-				16B7A9E61B668D070067C951 /* liballjoyn_about_cpp.a */,
-				16B7A9E41B668CE70067C951 /* liballjoyn_services_common_cpp.a */,
-				16B7A9E21B668C470067C951 /* libc++.dylib */,
-				16B7A9E01B668C400067C951 /* libc++.1.dylib */,
-				16B7A9DE1B668C380067C951 /* libc++abi.dylib */,
-				16B7A9D81B668C2F0067C951 /* libstdc++.6.0.9.dylib */,
-				16B7A9D91B668C300067C951 /* libstdc++.6.dylib */,
-				16B7A9DA1B668C300067C951 /* libstdc++.dylib */,
-				16B7A9D61B668C1E0067C951 /* SystemConfiguration.framework */,
 				16B7A9AC1B668AD20067C951 /* KiiAJDemo */,
 				16B7A9C91B668AD20067C951 /* KiiAJDemoTests */,
+				16B7A9F41B668F1D0067C951 /* Frameworks */,
 				16B7A9AB1B668AD20067C951 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 		16B7A9AC1B668AD20067C951 /* KiiAJDemo */ = {
 			isa = PBXGroup;
 			children = (
+				16B7A9F51B668F9A0067C951 /* Notification */,
 				16B7A9B11B668AD20067C951 /* AppDelegate.h */,
 				16B7A9B21B668AD20067C951 /* AppDelegate.m */,
 				16B7A9B41B668AD20067C951 /* FirstViewController.h */,
@@ -152,7 +158,6 @@
 				16B7A9B81B668AD20067C951 /* SecondViewController.m */,
 				16B7A9BA1B668AD20067C951 /* Main.storyboard */,
 				16B7A9BD1B668AD20067C951 /* Images.xcassets */,
-				16B7A9BF1B668AD20067C951 /* LaunchScreen.xib */,
 				16B7A9AD1B668AD20067C951 /* Supporting Files */,
 			);
 			path = KiiAJDemo;
@@ -182,6 +187,50 @@
 				16B7A9CB1B668AD20067C951 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16B7A9F41B668F1D0067C951 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				164D4B5B1B6692C5005E5FDC /* BundledRouter.o */,
+				164D4B571B669290005E5FDC /* libcrypto.a */,
+				164D4B581B669290005E5FDC /* libssl.a */,
+				16B7A9F21B668E730067C951 /* UIKit.framework */,
+				16B7A9F01B668D780067C951 /* liballjoyn_notification_objc.a */,
+				16B7A9EE1B668D6D0067C951 /* liballjoyn_notification_cpp.a */,
+				16B7A9EC1B668D5C0067C951 /* libAllJoynFramework_iOS.a */,
+				16B7A9EA1B668D4B0067C951 /* liballjoyn_about_objc.a */,
+				16B7A9E81B668D380067C951 /* liballjoyn_services_common_objc.a */,
+				16B7A9E61B668D070067C951 /* liballjoyn_about_cpp.a */,
+				16B7A9E41B668CE70067C951 /* liballjoyn_services_common_cpp.a */,
+				16B7A9E21B668C470067C951 /* libc++.dylib */,
+				16B7A9E01B668C400067C951 /* libc++.1.dylib */,
+				16B7A9DE1B668C380067C951 /* libc++abi.dylib */,
+				16B7A9D81B668C2F0067C951 /* libstdc++.6.0.9.dylib */,
+				16B7A9D91B668C300067C951 /* libstdc++.6.dylib */,
+				16B7A9DA1B668C300067C951 /* libstdc++.dylib */,
+				16B7A9D61B668C1E0067C951 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		16B7A9F51B668F9A0067C951 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				16B7A9F61B668FA40067C951 /* DetailsCell.h */,
+				16B7A9F71B668FA40067C951 /* DetailsCell.m */,
+				16B7A9F81B668FA40067C951 /* NotificationEntry.h */,
+				16B7A9F91B668FA40067C951 /* NotificationEntry.m */,
+				16B7A9FA1B668FA40067C951 /* ProducerViewController.h */,
+				16B7A9FB1B668FA40067C951 /* ProducerViewController.m */,
+				16B7A9FC1B668FA40067C951 /* MainViewController.h */,
+				16B7A9FD1B668FA40067C951 /* MainViewController.m */,
+				16B7A9FE1B668FA40067C951 /* ConsumerViewController.h */,
+				16B7A9FF1B668FA40067C951 /* ConsumerViewController.m */,
+				16B7AA001B668FA40067C951 /* NotificationUtils.h */,
+				16B7AA011B668FA40067C951 /* NotificationUtils.mm */,
+			);
+			name = Notification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +314,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16B7A9BC1B668AD20067C951 /* Main.storyboard in Resources */,
-				16B7A9C11B668AD20067C951 /* LaunchScreen.xib in Resources */,
 				16B7A9BE1B668AD20067C951 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,8 +334,14 @@
 			files = (
 				16B7A9B91B668AD20067C951 /* SecondViewController.m in Sources */,
 				16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */,
+				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
 				16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */,
+				16B7AA061B668FA40067C951 /* ConsumerViewController.m in Sources */,
+				16B7AA051B668FA40067C951 /* MainViewController.m in Sources */,
+				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
+				16B7AA041B668FA40067C951 /* ProducerViewController.m in Sources */,
 				16B7A9B01B668AD20067C951 /* main.m in Sources */,
+				16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,14 +370,6 @@
 				16B7A9BB1B668AD20067C951 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		16B7A9BF1B668AD20067C951 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				16B7A9C01B668AD20067C951 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -423,19 +469,27 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(ALLJOYN_ROOT)/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/inc",
-					"$(ALLJOYN_ROOT)/core/alljoyn/alljoyn_objc/AllJoynFramework/AllJoynFramework/",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/inc",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/about/inc",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/alljoyn_objc/AllJoynFramework/AllJoynFramework/",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/inc",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/inc",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/inc/alljoyn",
 				);
 				INFOPLIST_FILE = KiiAJDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib",
-					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/about/lib",
-					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib",
-					"\"$(SRCROOT)/../../Frameworks/openssl/build\"",
-					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib\"",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/lib",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/about/lib",
+					/Users/chrisbeauchamp/Code/Frameworks/openssl/build,
+					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib\"",
+					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib\"",
+					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/objc/lib\"",
+					"\"$(SRCROOT)/../../Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/cpp/lib\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DQCC_OS_GROUP_POSIX",
 					"-DQCC_OS_DARWIN",
@@ -446,8 +500,11 @@
 					"-lBundledRouter.o",
 					"-lajrouter",
 					"-lalljoyn",
+					"-lalljoyn_controlpanel_objc",
+					"-lalljoyn_controlpanel_cpp",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 i386";
 			};
 			name = Debug;
 		};
@@ -463,8 +520,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(ALLJOYN_ROOT)/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/inc",
-					"$(ALLJOYN_ROOT)/core/alljoyn/alljoyn_objc/AllJoynFramework/AllJoynFramework/",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/inc",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/alljoyn_objc/AllJoynFramework/AllJoynFramework/",
 				);
 				INFOPLIST_FILE = KiiAJDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -472,9 +529,7 @@
 					"$(inherited)",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/about/lib",
-					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib",
-					"\"$(SRCROOT)/../../Frameworks/openssl/build\"",
-					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib\"",
+					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib\" /Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib \"$(SRCROOT)/../../Frameworks/openssl/build\" /Users/chrisbeauchamp/Code/Frameworks/openssl/build \"$(SRCROOT)/../../Frameworks/openssl/build\" \"$(SRCROOT)/../../Frameworks/openssl/build\" /Users/chrisbeauchamp/Code/Frameworks/openssl/build",
 				);
 				OTHER_CFLAGS = (
 					"-DQCC_OS_GROUP_POSIX",
@@ -487,8 +542,11 @@
 					"-lBundledRouter.o",
 					"-lajrouter",
 					"-lalljoyn",
+					"-lalljoyn_controlpanel_objc",
+					"-lalljoyn_controlpanel_cpp",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 i386";
 			};
 			name = Release;
 		};
@@ -545,6 +603,7 @@
 				16B7A9D21B668AD20067C951 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		16B7A9D31B668AD20067C951 /* Build configuration list for PBXNativeTarget "KiiAJDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -553,6 +612,7 @@
 				16B7A9D51B668AD20067C951 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
