@@ -516,6 +516,7 @@
 					"-lalljoyn_controlpanel_cpp",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "bcb5f037-e37b-4b4f-b504-3d1c56faaf65";
 				VALID_ARCHS = "armv7 i386";
 			};
 			name = Debug;
@@ -562,6 +563,7 @@
 					"-lalljoyn_controlpanel_cpp",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "bcb5f037-e37b-4b4f-b504-3d1c56faaf65";
 				VALID_ARCHS = "armv7 i386";
 			};
 			name = Release;
