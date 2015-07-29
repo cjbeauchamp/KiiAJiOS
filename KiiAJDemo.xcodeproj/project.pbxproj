@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1647E54E1B69421E00E0E414 /* ConnectedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647E54D1B69421E00E0E414 /* ConnectedService.m */; };
+		1647E5511B69447700E0E414 /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647E5501B69447700E0E414 /* DeviceListViewController.m */; };
 		164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */; };
 		164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */; };
 		164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D4B621B66B9F6005E5FDC /* NotificationViewController.m */; };
+		16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AF8B811B696AAA0036C426 /* ServiceViewController.m */; };
 		16B7A9B01B668AD20067C951 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9AF1B668AD20067C951 /* main.m */; };
 		16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B21B668AD20067C951 /* AppDelegate.m */; };
-		16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B51B668AD20067C951 /* FirstViewController.m */; };
-		16B7A9B91B668AD20067C951 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B81B668AD20067C951 /* SecondViewController.m */; };
 		16B7A9BC1B668AD20067C951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16B7A9BA1B668AD20067C951 /* Main.storyboard */; };
 		16B7A9BE1B668AD20067C951 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16B7A9BD1B668AD20067C951 /* Images.xcassets */; };
 		16B7A9CD1B668AD20067C951 /* KiiAJDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9CC1B668AD20067C951 /* KiiAJDemoTests.m */; };
@@ -48,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1647E54C1B69421E00E0E414 /* ConnectedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedService.h; sourceTree = "<group>"; };
+		1647E54D1B69421E00E0E414 /* ConnectedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedService.m; sourceTree = "<group>"; };
+		1647E54F1B69447700E0E414 /* DeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListViewController.h; sourceTree = "<group>"; };
+		1647E5501B69447700E0E414 /* DeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
 		164D4B571B669290005E5FDC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../Frameworks/openssl/build/libcrypto.a; sourceTree = "<group>"; };
 		164D4B581B669290005E5FDC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../Frameworks/openssl/build/libssl.a; sourceTree = "<group>"; };
 		164D4B5B1B6692C5005E5FDC /* BundledRouter.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BundledRouter.o; path = "../../Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib/BundledRouter.o"; sourceTree = "<group>"; };
@@ -55,15 +60,13 @@
 		164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		164D4B611B66B9F6005E5FDC /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		164D4B621B66B9F6005E5FDC /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		16AF8B801B696AAA0036C426 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		16AF8B811B696AAA0036C426 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		16B7A9AA1B668AD20067C951 /* KiiAJDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiiAJDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B7A9AE1B668AD20067C951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16B7A9AF1B668AD20067C951 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16B7A9B11B668AD20067C951 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		16B7A9B21B668AD20067C951 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		16B7A9B41B668AD20067C951 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		16B7A9B51B668AD20067C951 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		16B7A9B71B668AD20067C951 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		16B7A9B81B668AD20067C951 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		16B7A9BB1B668AD20067C951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16B7A9BD1B668AD20067C951 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		16B7A9C61B668AD20067C951 /* KiiAJDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiiAJDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,12 +153,14 @@
 			isa = PBXGroup;
 			children = (
 				16B7A9F51B668F9A0067C951 /* Notification */,
+				1647E54C1B69421E00E0E414 /* ConnectedService.h */,
+				1647E54D1B69421E00E0E414 /* ConnectedService.m */,
+				1647E54F1B69447700E0E414 /* DeviceListViewController.h */,
+				1647E5501B69447700E0E414 /* DeviceListViewController.m */,
+				16AF8B801B696AAA0036C426 /* ServiceViewController.h */,
+				16AF8B811B696AAA0036C426 /* ServiceViewController.m */,
 				16B7A9B11B668AD20067C951 /* AppDelegate.h */,
 				16B7A9B21B668AD20067C951 /* AppDelegate.m */,
-				16B7A9B41B668AD20067C951 /* FirstViewController.h */,
-				16B7A9B51B668AD20067C951 /* FirstViewController.m */,
-				16B7A9B71B668AD20067C951 /* SecondViewController.h */,
-				16B7A9B81B668AD20067C951 /* SecondViewController.m */,
 				16B7A9BA1B668AD20067C951 /* Main.storyboard */,
 				16B7A9BD1B668AD20067C951 /* Images.xcassets */,
 				16B7A9AD1B668AD20067C951 /* Supporting Files */,
@@ -330,12 +335,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16B7A9B91B668AD20067C951 /* SecondViewController.m in Sources */,
+				1647E5511B69447700E0E414 /* DeviceListViewController.m in Sources */,
 				16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */,
 				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
-				16B7A9B61B668AD20067C951 /* FirstViewController.m in Sources */,
 				164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */,
 				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
+				16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */,
+				1647E54E1B69421E00E0E414 /* ConnectedService.m in Sources */,
 				16B7A9B01B668AD20067C951 /* main.m in Sources */,
 				16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */,
 			);

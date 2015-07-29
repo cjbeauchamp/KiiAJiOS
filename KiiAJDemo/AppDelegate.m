@@ -18,15 +18,19 @@
 #import "alljoyn/notification/AJNSNotificationSender.h"
 #import "alljoyn/notification/AJNSNotificationService.h"
 #import "samples_common/AJSCCommonBusListener.h"
+#import "alljoyn/about/AJNAnnouncementReceiver.h"
+
 #import "alljoyn/about/AJNAboutServiceApi.h"
 #import "AJNVersion.h"
 #import "NotificationViewController.h"
+#import "ConnectedService.h"
+#import "DeviceListViewController.h"
 
-static NSString * const DEFAULT_APP_NAME = @"KII_BASE";
+static NSString * const DEFAULT_APP_NAME = @"KiiBase";
 static NSString * const DAEMON_QUIET_PREFIX = @"quiet@"; // For tcl
-static NSString * const DAEMON_NAME = @"org.alljoyn.BusNode.IoeService"; // For tcl
-static NSString * const DEVICE_ID_PRODUCER= @"KiiBase";
-static NSString * const DEVICE_NAME_PRODUCER= @"KiiBase";
+static NSString * const DAEMON_NAME = @"org.alljoyn.BusNode.KiiService"; // For tcl
+static NSString * const DEVICE_ID_PRODUCER= @"kii-base-ipad-1";
+static NSString * const DEVICE_NAME_PRODUCER= @"KiiProducer";
 static NSString * const DEFAULT_LANG_PRODUCER= @"en";
 static NSString * const RICH_ICON_OBJECT_PATH= @"rich/Icon/Object/Path";
 static NSString * const RICH_AUDIO_OBJECT_PATH= @"rich/Audio/Object/Path";
@@ -38,9 +42,10 @@ static NSString *const DEFAULT_TTL = @"40000";
 static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 
 @interface AppDelegate ()
-<AJNSNotificationReceiver>
+<AJNSNotificationReceiver, AJNBusListener, AJNAboutListener, AJNSessionListener, AJNAnnouncementListener>
 
-@property (strong, nonatomic) AJNBusAttachment *busAttachment;
+@property (strong, nonatomic) AJNAnnouncementReceiver *announcementReceiver;
+
 
 @property (weak, nonatomic) AJNSNotificationSender *Sender;
 @property (strong, nonatomic) AJNSNotificationService *producerService;
@@ -48,6 +53,7 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 @property (strong, nonatomic) AJNAboutPropertyStoreImpl *aboutPropertyStoreImpl;
 
 @property (weak, nonatomic) AJNSNotificationService *consumerService;
+@property (strong, nonatomic) dispatch_queue_t annBtnCreationQueue;
 
 @property (strong, nonatomic) UIAlertView *selectConsumerLang;
 
@@ -69,7 +75,11 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
--(QStatus)fillAboutPropertyStoreImplData:(NSString*) appId appName:(NSString*) appName deviceId:(NSString*)deviceId deviceName:(NSString*) deviceName defaultLanguage:(NSString*) defaultLang
+-(QStatus)fillAboutPropertyStoreImplData:(NSString*)appId
+                                 appName:(NSString*)appName
+                                deviceId:(NSString*)deviceId
+                              deviceName:(NSString*)deviceName
+                         defaultLanguage:(NSString*)defaultLang
 {
     QStatus status;
     
@@ -100,8 +110,7 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     }
     
     // SupportedLangs
-    NSArray *languages = @[@"en", @"sp", @"fr"];
-    status = [self.aboutPropertyStoreImpl setSupportedLangs:languages];
+    status = [self.aboutPropertyStoreImpl setSupportedLangs:@[@"en"]];
     if (status != ER_OK) {
         return status;
     }
@@ -113,19 +122,19 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     }
     
     // ModelNumber
-    status = [self.aboutPropertyStoreImpl setModelNumber:@"Wxfy388i"];
+    status = [self.aboutPropertyStoreImpl setModelNumber:@"Kii123"];
     if (status != ER_OK) {
         return status;
     }
     
     // DateOfManufacture
-    status = [self.aboutPropertyStoreImpl setDateOfManufacture:@"10/1/2199"];
+    status = [self.aboutPropertyStoreImpl setDateOfManufacture:@"7/29/15"];
     if (status != ER_OK) {
         return status;
     }
     
     // SoftwareVersion
-    status = [self.aboutPropertyStoreImpl setSoftwareVersion:@"12.20.44 build 44454"];
+    status = [self.aboutPropertyStoreImpl setSoftwareVersion:@"1.0"];
     if (status != ER_OK) {
         return status;
     }
@@ -137,45 +146,25 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     }
     
     // HardwareVersion
-    status = [self.aboutPropertyStoreImpl setHardwareVersion:@"355.499. b"];
+    status = [self.aboutPropertyStoreImpl setHardwareVersion:@"1.0"];
     if (status != ER_OK) {
         return status;
     }
     
     // Description
-    status = [self.aboutPropertyStoreImpl setDescription:@"This is an Alljoyn Application" language:@"en"];
-    if (status != ER_OK) {
-        return status;
-    }
-    
-    status = [self.aboutPropertyStoreImpl setDescription:@"Esta es una Alljoyn aplicación" language:@"sp"];
-    if (status != ER_OK) {
-        return status;
-    }
-    
-    status = [self.aboutPropertyStoreImpl setDescription:@"C'est une Alljoyn application"  language:@"fr"];
+    status = [self.aboutPropertyStoreImpl setDescription:@"Kii/Alljoyn Demo Hub" language:@"en"];
     if (status != ER_OK) {
         return status;
     }
     
     // Manufacturer
-    status = [self.aboutPropertyStoreImpl setManufacturer:@"Company" language:@"en"];
-    if (status != ER_OK) {
-        return status;
-    }
-    
-    status = [self.aboutPropertyStoreImpl setManufacturer:@"Empresa" language:@"sp"];
-    if (status != ER_OK) {
-        return status;
-    }
-    
-    status = [self.aboutPropertyStoreImpl setManufacturer:@"Entreprise" language:@"fr"];
+    status = [self.aboutPropertyStoreImpl setManufacturer:@"Kii" language:@"en"];
     if (status != ER_OK) {
         return status;
     }
     
     // SupportedUrl
-    status = [self.aboutPropertyStoreImpl setSupportUrl:@"http://www.alljoyn.org"];
+    status = [self.aboutPropertyStoreImpl setSupportUrl:@"http://kii.com"];
     if (status != ER_OK) {
         return status;
     }
@@ -385,7 +374,11 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 
 - (QStatus)prepareBusAttachment:(id <AJNAuthenticationListener> )authListener
 {
-    self.busAttachment = [[AJNBusAttachment alloc] initWithApplicationName:@"CommonServiceApp" allowRemoteMessages:true];
+    self.busAttachment = [[AJNBusAttachment alloc] initWithApplicationName:@"KiiApp"
+                                                       allowRemoteMessages:true];
+    
+    [self.busAttachment registerBusListener:self];
+    [self.busAttachment registerAboutListener:self];
     
     // Start the BusAttachment
     QStatus status = [self.busAttachment start];
@@ -396,7 +389,7 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     }
     
     // Connect to the daemon using address provided
-    status = [self.busAttachment connectWithArguments:nil];
+    status = [self.busAttachment connectWithArguments:@"null:"];
     if (status != ER_OK) {
         [self.busAttachment destroy];
         return ER_FAIL;
@@ -422,6 +415,16 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
             [self.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"Succefully advertised daemon name %@", DAEMON_NAME]];
         }
     }
+    
+    self.announcementReceiver = [[AJNAnnouncementReceiver alloc] initWithAnnouncementListener:self andBus:self.busAttachment];
+    const char* interfaces[] = { [@"org.alljoyn.About" UTF8String] };
+    status = [self.announcementReceiver registerAnnouncementReceiverForInterfaces:interfaces
+                                                           withNumberOfInterfaces:1];
+    if (status != ER_OK) {
+        NSLog(@"[%@] [%@] Failed to registerAnnouncementReceiver - exiting application", @"FATAL", [[self class] description]);
+        exit(1);
+    }
+
     return status;
 }
 
@@ -430,7 +433,10 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     self.notificationEntries = [[NSMutableArray alloc] init];
+    self.connectedServices = [[NSMutableArray alloc] init];
     
+    self.annBtnCreationQueue = dispatch_queue_create("org.alljoyn.announcementbuttoncreationQueue", NULL);
+
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     [Kii beginWithID:@"a17d7075"
@@ -566,9 +572,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 }
 
 #pragma mark - About Service methods
+- (void)didJoin:(NSString *)joiner inSessionWithId:(AJNSessionId)sessionId onSessionPort:(AJNSessionPort)sessionPort
+{
+    NSLog(@"DIDJOIN: %@", joiner);
+}
 
 - (QStatus)prepareAboutService:(AJSCCommonBusListener *)busListener servicePort:(AJNSessionPort)port
 {
+
     if (!self.busAttachment)
         return ER_BAD_ARG_1;
     
@@ -592,13 +603,18 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     [self.aboutService startWithBus:self.busAttachment andPropertyStore:self.aboutPropertyStoreImpl]; //isServiceStarted = true
     
     
-    
     [self.logger debugTag:[[self class] description] text:@"registerBusListener"];
     [busListener setSessionPort:port];
     [self.busAttachment registerBusListener:busListener];
     
-    AJNSessionOptions *opt = [[AJNSessionOptions alloc] initWithTrafficType:(kAJNTrafficMessages) supportsMultipoint:(false) proximity:(kAJNProximityAny) transportMask:(kAJNTransportMaskAny)];
-    QStatus aboutStatus = [self.busAttachment bindSessionOnPort:SERVICE_PORT withOptions:opt withDelegate:busListener];
+    AJNSessionOptions *opt = [[AJNSessionOptions alloc] initWithTrafficType:(kAJNTrafficMessages)
+                                                         supportsMultipoint:(false)
+                                                                  proximity:(kAJNProximityAny)
+                                                              transportMask:(kAJNTransportMaskAny)];
+    
+    QStatus aboutStatus = [self.busAttachment bindSessionOnPort:SERVICE_PORT
+                                                    withOptions:opt
+                                                   withDelegate:busListener];
     
     if (aboutStatus == ER_ALLJOYN_BINDSESSIONPORT_REPLY_ALREADY_EXISTS)
         [self.logger infoTag:[[self class] description] text:([NSString stringWithFormat:@"bind status: ER_ALLJOYN_BINDSESSIONPORT_REPLY_ALREADY_EXISTS"])];
@@ -762,6 +778,116 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void)receive:(AJNSNotification *)ajnsNotification
 {
     [self logNotification:ajnsNotification];
+}
+
+
+- (void)listenerDidRegisterWithBus:(AJNBusAttachment*)busAttachment
+{
+    NSLog(@"AJNBusListener::listenerDidRegisterWithBus:%@",busAttachment);
+}
+
+- (void)listenerDidUnregisterWithBus:(AJNBusAttachment*)busAttachment
+{
+    NSLog(@"AJNBusListener::listenerDidUnregisterWithBus:%@",busAttachment);
+}
+
+// Here we receive an announcement from AJN and add it to the client's list of services avaialble
+- (void)announceWithVersion:(uint16_t)version
+                       port:(uint16_t)port
+                    busName:(NSString *)busName
+         objectDescriptions:(NSMutableDictionary *)objectDescs
+                  aboutData:(NSMutableDictionary **)aboutData
+{
+    
+    NSLog(@"About data: %@", *aboutData);
+    NSLog(@"Descs: %@", objectDescs);
+    
+    dispatch_sync(self.annBtnCreationQueue, ^{
+        
+        NSLog(@"Have announcement!");
+        
+        AJNMessageArgument *appName = (AJNMessageArgument*)[*aboutData objectForKey:@"AppName"];
+        AJNMessageArgument *appID = (AJNMessageArgument*)[*aboutData objectForKey:@"AppId"];
+        AJNMessageArgument *deviceName = (AJNMessageArgument*)[*aboutData objectForKey:@"DeviceName"];
+        AJNMessageArgument *deviceID = (AJNMessageArgument*)[*aboutData objectForKey:@"DeviceId"];
+        AJNMessageArgument *manufacturer = (AJNMessageArgument*)[*aboutData objectForKey:@"Manufacturer"];
+        
+        NSLog(@"Announcement: %@", [appName xml]);
+        NSLog(@"Announcementdid: %@", [deviceID xml]);
+        
+        ConnectedService *newService = [[ConnectedService alloc] init];
+        newService.appID = [appID xml];
+        newService.appName = [appName xml];
+        newService.deviceName = [deviceName xml];
+        newService.deviceID = [deviceID xml];
+        newService.manufacturer = [manufacturer xml];
+        newService.interfacePaths = objectDescs;
+        newService.busName = busName;
+
+        BOOL has = FALSE;
+        
+        for(ConnectedService *c in self.connectedServices) {
+            if([c.deviceID isEqualToString:newService.deviceID]) {
+                has = TRUE;
+                break;
+            }
+        }
+        
+        if(!has) {
+            
+            NSLog(@"Adding service: %@", newService);
+
+            [self.connectedServices addObject:newService];
+
+            NSLog(@"Now services: %@", self.connectedServices);
+
+//            [self.deviceVC reloadDevices];
+        }
+    });
+
+}
+
+- (void)didFindAdvertisedName:(NSString*)name withTransportMask:(AJNTransportMask)transport namePrefix:(NSString*)namePrefix
+{
+    NSLog(@"AJNBusListener::didFindAdvertisedName:%@ withTransportMask:%u namePrefix:%@", name, transport, namePrefix);
+}
+
+- (void)didLoseAdvertisedName:(NSString*)name withTransportMask:(AJNTransportMask)transport namePrefix:(NSString*)namePrefix
+{
+    NSLog(@"AJNBusListener::listenerDidUnregisterWithBus:%@ withTransportMask:%u namePrefix:%@",name,transport,namePrefix);
+}
+
+- (void)nameOwnerChanged:(NSString*)name to:(NSString*)newOwner from:(NSString*)previousOwner
+{
+//    for(ConnectedService *c in self.connectedServices) {
+//        if([c.busName isEqualToString:previousOwner]) {
+//            
+//        }
+//    }
+    NSLog(@"AJNBusListener::nameOwnerChanged:%@ to:%@ from:%@", name, newOwner, previousOwner);
+//    [self.busAttachment findAdvertisedName:name];
+}
+
+- (void)busWillStop
+{
+    NSLog(@"AJNBusListener::busWillStop");
+}
+
+- (void)busDidDisconnect
+{
+    NSLog(@"AJNBusListener::busDidDisconnect");
+}
+
+- (void)didAddMemberNamed:(NSString*)memberName
+                toSession:(AJNSessionId)sessionId
+{
+    
+}
+
+- (void)didRemoveMemberNamed:(NSString*)memberName
+                 fromSession:(AJNSessionId)sessionId
+{
+    
 }
 
 @end
