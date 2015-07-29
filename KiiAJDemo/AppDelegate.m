@@ -738,11 +738,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         [object setObject:[[NSDate date] description] forKey:@"timestamp"];
         [object setObject:textDicts forKey:@"text"];
         
-        [object describe];
-
         // Save the object
         [object saveWithBlock:^(KiiObject *object, NSError *error) {
-            NSLog(@"Object saved remotely");
+            NSLog(@"Object saved remotely with error: %@", error);
+            if(object != nil) {
+                [object describe];
+            }
         }];
         
         [self.notificationEntries addObject:ajnsNotification];
