@@ -22,11 +22,11 @@
 #import "AJNVersion.h"
 #import "NotificationViewController.h"
 
-static NSString * const DEFAULT_APP_NAME = @"DISPLAY_ALL";
+static NSString * const DEFAULT_APP_NAME = @"KII_BASE";
 static NSString * const DAEMON_QUIET_PREFIX = @"quiet@"; // For tcl
 static NSString * const DAEMON_NAME = @"org.alljoyn.BusNode.IoeService"; // For tcl
-static NSString * const DEVICE_ID_PRODUCER= @"ProducerBasic";
-static NSString * const DEVICE_NAME_PRODUCER= @"ProducerBasic";
+static NSString * const DEVICE_ID_PRODUCER= @"KiiBase";
+static NSString * const DEVICE_NAME_PRODUCER= @"KiiBase";
 static NSString * const DEFAULT_LANG_PRODUCER= @"en";
 static NSString * const RICH_ICON_OBJECT_PATH= @"rich/Icon/Object/Path";
 static NSString * const RICH_AUDIO_OBJECT_PATH= @"rich/Audio/Object/Path";
@@ -708,6 +708,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     [notificationContent appendFormat:@"CPS Path: '%@'\n",[ajnsNotification controlPanelServiceObjectPath]];
     
+    NSMutableArray *textDicts = [NSMutableArray array];
+    
+    NSLog(@"Notif text: %@", [ajnsNotification ajnsntArr]);
+    for(AJNSNotificationText *t in [ajnsNotification ajnsntArr]) {
+        [textDicts addObject:@{@"language":[t getLanguage], @"text":[t getText]}];
+    }
     
     AJNSNotificationText *nt = ajnsNotification.ajnsntArr[0];
     
@@ -718,6 +724,27 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     [self.logger debugTag:[[self class] description] text:[NSString stringWithFormat:@"Received new Notification:\n%@", notificationContent]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        KiiBucket *bucket = [Kii bucketWithName:@"notifications"];
+        KiiObject *object = [bucket createObject];
+        
+        [object setObject:[ajnsNotification appId] forKey:@"appId"];
+        [object setObject:[ajnsNotification appName] forKey:@"appName"];
+        [object setObject:[ajnsNotification deviceId] forKey:@"deviceId"];
+        [object setObject:[ajnsNotification deviceName] forKey:@"deviceName"];
+        [object setObject:[NSNumber numberWithInt:[ajnsNotification messageId]] forKey:@"messageId"];
+        [object setObject:[AJNSNotificationEnums AJNSMessageTypeToString:[ajnsNotification messageType]] forKey:@"messageType"];
+        [object setObject:[ajnsNotification senderBusName] forKey:@"originalSenderBusName"];
+        [object setObject:[[NSDate date] description] forKey:@"timestamp"];
+        [object setObject:textDicts forKey:@"text"];
+        
+        [object describe];
+
+        // Save the object
+        [object saveWithBlock:^(KiiObject *object, NSError *error) {
+            NSLog(@"Object saved remotely");
+        }];
+        
         [self.notificationEntries addObject:ajnsNotification];
         [self.notificationVC refreshTable];
     });
