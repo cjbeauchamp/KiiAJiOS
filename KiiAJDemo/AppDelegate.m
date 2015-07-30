@@ -21,7 +21,6 @@
 #import "alljoyn/about/AJNAnnouncementReceiver.h"
 #import "XMLDictionary.h"
 #import "NSString+StripTags.h"
-#import "Command.h"
 
 #import "alljoyn/about/AJNAboutServiceApi.h"
 #import "AJNVersion.h"
@@ -520,7 +519,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                     
                     [self sendCommand:[object getObjectForKey:@"method"]
                           toInterface:[object getObjectForKey:@"interface"]
-                             onDevice:[object getObjectForKey:@"deviceID"]];
+                             onDevice:[object getObjectForKey:@"deviceID"]
+                            usingPath:[object getObjectForKey:@"path"]];
                 }
 
             } else {
@@ -536,12 +536,13 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void) sendCommand:(NSString*)method
          toInterface:(NSString*)interface
             onDevice:(NSString*)device
+           usingPath:(NSString*)path
 {
+    
     for(ConnectedService *s in self.connectedServices) {
+        
         if([[s deviceID] isEqualToString:device]) {
-            Command *c = [[Command alloc] init];
-            c.service = s;
-            [c run];
+            [s run:method onInterface:interface usingPath:path];
         }
     }
 }
@@ -862,22 +863,21 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         if(!has) {
             
             NSLog(@"Adding service: %@", newService);
+            
+            // detach to its own queue
+            
+            dispatch_queue_t myQueue = dispatch_queue_create([newService.deviceID cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+            dispatch_async(myQueue, ^{
+                
+                // Perform long running process
+                [newService connect];
+            });
+
+            
 
             [self.connectedServices addObject:newService];
 
             NSLog(@"Now services: %@", self.connectedServices);
-            
-            KiiBucket *bucket = [Kii bucketWithName:@"localDevices"];
-            KiiObject *object = [bucket createObjectWithID:[newService.deviceID md5]];
-            [object setObject:newService.deviceName forKey:@"deviceName"];
-            [object setObject:newService.appName forKey:@"appName"];
-            [object setObject:newService.appID forKey:@"appID"];
-            [object setObject:newService.deviceID forKey:@"deviceID"];
-            [object setObject:newService.manufacturer forKey:@"manufacturer"];
-            [object saveAllFields:YES withBlock:^(KiiObject *object, NSError *error) {
-                NSLog(@"Object saved: %@", error);
-            }];
-
 
 //            [self.deviceVC reloadDevices];
         }

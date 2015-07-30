@@ -66,7 +66,7 @@
         
         self.proxy = [[AJNProxyBusObject alloc] initWithBusAttachment:[AppDelegate sharedDelegate].busAttachment
                                                           serviceName:self.service.busName
-                                                           objectPath:@"/ControlPanel"
+                                                           objectPath:@"/About"
                                                             sessionId:self.sessionID];
         
         [self.proxy introspectRemoteObject];

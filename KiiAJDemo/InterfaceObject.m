@@ -22,6 +22,7 @@
 - (NSDictionary*) dictValue
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:self.name forKey:@"name"];
+    [dict setObject:self.path forKey:@"path"];
     
     NSMutableArray *arr = [NSMutableArray array];
     for(InterfaceMethod *m in self.methods) {

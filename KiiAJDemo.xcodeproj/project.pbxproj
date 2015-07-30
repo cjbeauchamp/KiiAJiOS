@@ -43,7 +43,6 @@
 		16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F91B668FA40067C951 /* NotificationEntry.m */; };
 		16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16B7AA011B668FA40067C951 /* NotificationUtils.mm */; };
 		16B905781B6A645A00D26414 /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B905771B6A645A00D26414 /* NSString+StripTags.m */; };
-		16B9057B1B6A787D00D26414 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B9057A1B6A787D00D26414 /* Command.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,8 +112,6 @@
 		16B7AA011B668FA40067C951 /* NotificationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NotificationUtils.mm; sourceTree = "<group>"; };
 		16B905761B6A645A00D26414 /* NSString+StripTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripTags.h"; sourceTree = "<group>"; };
 		16B905771B6A645A00D26414 /* NSString+StripTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripTags.m"; sourceTree = "<group>"; };
-		16B905791B6A787D00D26414 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
-		16B9057A1B6A787D00D26414 /* Command.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Command.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,8 +195,6 @@
 				16AADBF91B69F4A700BE3530 /* InterfaceArgument.m */,
 				16B905761B6A645A00D26414 /* NSString+StripTags.h */,
 				16B905771B6A645A00D26414 /* NSString+StripTags.m */,
-				16B905791B6A787D00D26414 /* Command.h */,
-				16B9057A1B6A787D00D26414 /* Command.m */,
 			);
 			path = KiiAJDemo;
 			sourceTree = "<group>";
@@ -377,7 +372,6 @@
 				16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */,
 				16AADBF41B69F26B00BE3530 /* InterfaceObject.m in Sources */,
 				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
-				16B9057B1B6A787D00D26414 /* Command.m in Sources */,
 				164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */,
 				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
 				16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */,

@@ -18,4 +18,7 @@
 @property (nonatomic, strong) NSString *busName;
 @property (nonatomic, strong) NSDictionary *interfacePaths;
 
+- (void) connect;
+- (void) run:(NSString*)method onInterface:(NSString*)interface usingPath:(NSString*)usingPath;
+
 @end
