@@ -19,6 +19,9 @@
 #import "alljoyn/notification/AJNSNotificationService.h"
 #import "samples_common/AJSCCommonBusListener.h"
 #import "alljoyn/about/AJNAnnouncementReceiver.h"
+#import "XMLDictionary.h"
+#import "NSString+StripTags.h"
+#import "Command.h"
 
 #import "alljoyn/about/AJNAboutServiceApi.h"
 #import "AJNVersion.h"
@@ -451,6 +454,9 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     [KiiPushSubscription subscribeSynchronous:[Kii bucketWithName:@"messages"] withError:&error];
     NSLog(@"Error: %@", error);
     
+    [KiiPushSubscription subscribeSynchronous:[Kii bucketWithName:@"commands"] withError:&error];
+    NSLog(@"Error: %@", error);
+    
     
     // Register APNS
     // If you use Xcode5, you can only use the same code as the else block.
@@ -509,6 +515,13 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                     // kick it over to the pi
                     [self sendNotification:[object getObjectForKey:@"body"]];
                 }
+                
+                else if([bucket isEqualToString:@"commands"]) {
+                    
+                    [self sendCommand:[object getObjectForKey:@"method"]
+                          toInterface:[object getObjectForKey:@"interface"]
+                             onDevice:[object getObjectForKey:@"deviceID"]];
+                }
 
             } else {
                 NSLog(@"error retrieving kiiobject: %@", error);
@@ -518,6 +531,19 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         
     }
 
+}
+
+- (void) sendCommand:(NSString*)method
+         toInterface:(NSString*)interface
+            onDevice:(NSString*)device
+{
+    for(ConnectedService *s in self.connectedServices) {
+        if([[s deviceID] isEqualToString:device]) {
+            Command *c = [[Command alloc] init];
+            c.service = s;
+            [c run];
+        }
+    }
 }
 
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -816,11 +842,11 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         NSLog(@"Announcementdid: %@", [deviceID xml]);
         
         ConnectedService *newService = [[ConnectedService alloc] init];
-        newService.appID = [appID xml];
-        newService.appName = [appName xml];
-        newService.deviceName = [deviceName xml];
-        newService.deviceID = [deviceID xml];
-        newService.manufacturer = [manufacturer xml];
+        newService.appID = [[appID xml] stripTags];
+        newService.appName = [[appName xml] stripTags];
+        newService.deviceName = [[deviceName xml] stripTags];
+        newService.deviceID = [[deviceID xml] stripTags];
+        newService.manufacturer = [[manufacturer xml] stripTags];
         newService.interfacePaths = objectDescs;
         newService.busName = busName;
 
@@ -840,6 +866,18 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             [self.connectedServices addObject:newService];
 
             NSLog(@"Now services: %@", self.connectedServices);
+            
+            KiiBucket *bucket = [Kii bucketWithName:@"localDevices"];
+            KiiObject *object = [bucket createObjectWithID:[newService.deviceID md5]];
+            [object setObject:newService.deviceName forKey:@"deviceName"];
+            [object setObject:newService.appName forKey:@"appName"];
+            [object setObject:newService.appID forKey:@"appID"];
+            [object setObject:newService.deviceID forKey:@"deviceID"];
+            [object setObject:newService.manufacturer forKey:@"manufacturer"];
+            [object saveAllFields:YES withBlock:^(KiiObject *object, NSError *error) {
+                NSLog(@"Object saved: %@", error);
+            }];
+
 
 //            [self.deviceVC reloadDevices];
         }
@@ -864,7 +902,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 //            
 //        }
 //    }
-    NSLog(@"AJNBusListener::nameOwnerChanged:%@ to:%@ from:%@", name, newOwner, previousOwner);
+//    NSLog(@"AJNBusListener::nameOwnerChanged:%@ to:%@ from:%@", name, newOwner, previousOwner);
 //    [self.busAttachment findAdvertisedName:name];
 }
 

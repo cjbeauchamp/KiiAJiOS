@@ -10,4 +10,14 @@
 
 @implementation InterfaceArgument
 
+- (NSDictionary*) dictValue
+{
+    return @{
+             @"name": self.name,
+             @"direction": self.direction,
+             @"type": self.type
+             };
+}
+
+
 @end

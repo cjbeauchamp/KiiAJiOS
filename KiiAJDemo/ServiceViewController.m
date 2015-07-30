@@ -15,8 +15,11 @@
 #import "InterfaceObject.h"
 #import "InterfaceMethod.h"
 #import "InterfaceArgument.h"
+#import "NSString+StripTags.h"
 
 #import "XMLDictionary.h"
+
+#import <KiiSDK/Kii.h>
 
 @interface ServiceViewController ()
 <AJNSessionListener, AJNProxyBusObjectDelegate, AJNSessionDelegate>
@@ -63,96 +66,127 @@
         
         self.proxy = [[AJNProxyBusObject alloc] initWithBusAttachment:[AppDelegate sharedDelegate].busAttachment
                                                           serviceName:self.service.busName
-                                                           objectPath:@"/About"
+                                                           objectPath:@"/ControlPanel"
                                                             sessionId:self.sessionID];
         
         [self.proxy introspectRemoteObject];
         
         for(AJNInterfaceDescription *interface in [self.proxy interfaces]) {
+            
+            InterfaceObject *o = [[InterfaceObject alloc] init];
+            o.name = interface.name;
+            
             NSLog(@"Interface: %@", interface.name);
             for(AJNInterfaceMember *member in interface.members) {
-                NSLog(@"member: %@", member.name);
-            }
-        }
-        
-        AJNMessageArgument *language = [[AJNMessageArgument alloc] init];
-        [language setValue:@"s", ""];
-        [language stabilize];
-        NSArray *args = [[NSArray alloc] initWithObjects:language, nil];
-        
-        AJNMessage *mr = [[AJNMessage alloc] init];
-        QStatus status = [self.proxy callMethodWithName:@"IntrospectWithDescription"
-                                    onInterfaceWithName:@"org.allseen.Introspectable"
-                                          withArguments:args
-                                            methodReply:&mr];
-        
-        self.methodReply = mr;
-        
-        if(ER_OK == status) {
-            
-            NSString *xmlString = [self.methodReply xmlDescription];
-            
-            NSError *error = nil;
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<![^>]*>"
-                                                                                   options:0
-                                                                                     error:&error];
-            
-            xmlString = [regex stringByReplacingMatchesInString:xmlString
-                                                        options:0
-                                                          range:NSMakeRange(0, [xmlString length])
-                                                   withTemplate:@""];
-            
-            NSLog(@"XML: %@", xmlString);
-            
-            NSDictionary *xmlDict = [NSDictionary dictionaryWithXMLString:xmlString];
-            
-            @try {
-                NSArray *interfaces = xmlDict[@"body"][@"string"][@"node"][@"interface"];
-
-                for(NSDictionary *i in interfaces) {
-//                    NSLog(@"O: %@", i);
-                    InterfaceObject *o = [[InterfaceObject alloc] init];
-                    o.name = i[@"_name"];
-                    
-                    NSArray *methods = i[@"method"];
-                    if(![i[@"method"] isKindOfClass:[NSArray class]]) {
-                        methods = @[i[@"method"]];
-                    }
-                    
-                    for(NSDictionary *m in methods) {
-//                        NSLog(@"M: %@", m);
-                        InterfaceMethod *method = [[InterfaceMethod alloc] init];
-                        method.name = m[@"_name"];
-                        
-                        NSArray *args = m[@"arg"];
-                        if(![m[@"arg"] isKindOfClass:[NSArray class]]) {
-                            args = @[m[@"arg"]];
-                        }
-
-                        for(NSDictionary *a in args) {
-//                            NSLog(@"A: %@", a);
-                            InterfaceArgument *argument = [[InterfaceArgument alloc] init];
-                            argument.name = a[@"_name"];
-                            argument.direction = a[@"_direction"];
-                            argument.type = a[@"_type"];
-                            [method.arguments addObject:argument];
-                        }
-                        
-                        [o.methods addObject:method];
-                    }
-
-                    [self.interfaceObjects addObject:o];
-                }
                 
-                [self.tableView reloadData];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"Keys must not have existed");
+                NSLog(@"member: %@", member.name);
+
+                InterfaceMethod *method = [[InterfaceMethod alloc] init];
+                method.name = member.name;
+                [o.methods addObject:method];
             }
             
-        } else {
-            NSLog(@"ERR");
+            [self.interfaceObjects addObject:o];
         }
+        
+        KiiBucket *bucket = [Kii bucketWithName:@"localDevices"];
+        KiiObject *object = [bucket createObjectWithID:[self.service.deviceID md5]];
+        [object setObject:self.service.deviceName forKey:@"deviceName"];
+        [object setObject:self.service.appName forKey:@"appName"];
+        [object setObject:self.service.appID forKey:@"appID"];
+        [object setObject:self.service.deviceID forKey:@"deviceID"];
+        [object setObject:self.service.manufacturer forKey:@"manufacturer"];
+
+        NSMutableArray *arr = [NSMutableArray array];
+        for(InterfaceObject *o in self.interfaceObjects) {
+            [arr addObject:[o dictValue]];
+        }
+        [object setObject:arr forKey:@"interfaces"];
+        
+        [object saveAllFields:YES withBlock:^(KiiObject *object, NSError *error) {
+            NSLog(@"Object saved: %@", error);
+        }];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+
+//        AJNMessage *mr = [[AJNMessage alloc] init];
+//        QStatus status = [self.proxy callMethodWithName:@"Introspect"
+//                                    onInterfaceWithName:@"org.freedesktop.DBus.Introspectable"
+//                                          withArguments:nil
+//                                            methodReply:&mr];
+//        
+//        self.methodReply = mr;
+//        
+//        if(ER_OK == status) {
+//            
+//            NSString *xmlString = [self.methodReply xmlDescription];
+//            
+//            NSError *error = nil;
+//            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<![^>]*>"
+//                                                                                   options:0
+//                                                                                     error:&error];
+//            
+//            xmlString = [regex stringByReplacingMatchesInString:xmlString
+//                                                        options:0
+//                                                          range:NSMakeRange(0, [xmlString length])
+//                                                   withTemplate:@""];
+//            
+//            NSLog(@"XML: %@", xmlString);
+//            
+//            NSDictionary *xmlDict = [NSDictionary dictionaryWithXMLString:xmlString];
+//            
+//            @try {
+//                NSArray *interfaces = xmlDict[@"body"][@"string"][@"node"][@"interface"];
+//
+//                for(NSDictionary *i in interfaces) {
+////                    NSLog(@"O: %@", i);
+//                    InterfaceObject *o = [[InterfaceObject alloc] init];
+//                    o.name = i[@"_name"];
+//                    
+//                    NSArray *methods = i[@"method"];
+//                    if(![i[@"method"] isKindOfClass:[NSArray class]]) {
+//                        methods = @[i[@"method"]];
+//                    }
+//                    
+//                    for(NSDictionary *m in methods) {
+////                        NSLog(@"M: %@", m);
+//                        InterfaceMethod *method = [[InterfaceMethod alloc] init];
+//                        method.name = m[@"_name"];
+//                        
+//                        NSArray *args = m[@"arg"];
+//                        if(![m[@"arg"] isKindOfClass:[NSArray class]]) {
+//                            args = @[m[@"arg"]];
+//                        }
+//
+//                        for(NSDictionary *a in args) {
+////                            NSLog(@"A: %@", a);
+//                            InterfaceArgument *argument = [[InterfaceArgument alloc] init];
+//                            argument.name = a[@"_name"];
+//                            argument.direction = a[@"_direction"];
+//                            argument.type = a[@"_type"];
+//                            [method.arguments addObject:argument];
+//                        }
+//                        
+//                        [o.methods addObject:method];
+//                    }
+//
+//                    [self.interfaceObjects addObject:o];
+//                }
+//                
+//                
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.tableView reloadData];
+//                });
+//            }
+//            @catch (NSException *exception) {
+//                NSLog(@"Keys must not have existed");
+//            }
+//            
+//        } else {
+//            NSLog(@"ERR");
+//        }
         
         NSLog(@"Here");
         
@@ -257,8 +291,23 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ConnectedService *c = [[AppDelegate sharedDelegate].connectedServices objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"show_service" sender:c];
+    InterfaceObject *o = [self.interfaceObjects objectAtIndex:indexPath.section];
+    InterfaceMethod *m = [o.methods objectAtIndex:indexPath.row];
+    
+    AJNMessage *mr = [[AJNMessage alloc] init];
+    QStatus status = [self.proxy callMethodWithName:m.name
+                                onInterfaceWithName:o.name
+                                      withArguments:nil
+                                        methodReply:&mr];
+    
+    self.methodReply = mr;
+    
+    if(ER_OK == status) {
+        NSLog(@"Worked!");
+    } else {
+        NSLog(@"Failed!");
+    }
+
 }
 
 

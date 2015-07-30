@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSMutableArray *arguments;
 
+- (NSDictionary*) dictValue;
+
 @end

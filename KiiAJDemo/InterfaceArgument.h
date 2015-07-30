@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSString *direction;
 @property (nonatomic, strong) NSString *type;
 
+- (NSDictionary*) dictValue;
+
 @end

@@ -64,7 +64,7 @@
     
     // Configure the cell...
     ConnectedService *c = [[AppDelegate sharedDelegate].connectedServices objectAtIndex:indexPath.row];
-    cell.textLabel.text = c.appName;
+    cell.textLabel.text = c.deviceName;
     
     return cell;
 }

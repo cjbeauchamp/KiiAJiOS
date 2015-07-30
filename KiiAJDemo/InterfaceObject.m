@@ -8,6 +8,8 @@
 
 #import "InterfaceObject.h"
 
+#import "InterfaceMethod.h"
+
 @implementation InterfaceObject
 
 - (id) init
@@ -15,6 +17,19 @@
     self = [super init];
     self.methods = [[NSMutableArray alloc] init];
     return self;
+}
+
+- (NSDictionary*) dictValue
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:self.name forKey:@"name"];
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    for(InterfaceMethod *m in self.methods) {
+        [arr addObject:[m dictValue]];
+    }
+    
+    [dict setObject:arr forKey:@"methods"];
+    return [NSDictionary dictionaryWithDictionary:dict];
 }
 
 @end
