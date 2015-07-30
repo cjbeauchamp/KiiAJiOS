@@ -68,35 +68,34 @@
             }
         }
         
-//        AJNMessageArgument *language = [[AJNMessageArgument alloc] init];
-//        [language setValue:@"s", ""];
-//        [language stabilize];
-//        NSArray *args = [[NSArray alloc] initWithObjects:language, nil];
+        AJNMessageArgument *language = [[AJNMessageArgument alloc] init];
+        [language setValue:@"s", ""];
+        [language stabilize];
+        NSArray *args = [[NSArray alloc] initWithObjects:language, nil];
         
         AJNMessage *mr = [[AJNMessage alloc] init];
-        QStatus status = [self.proxy callMethodWithName:@"Introspect" // IntrospectWithDescription
-                                    onInterfaceWithName:@"org.freedesktop.DBus.Introspectable" //org.allseen.Introspectable
-                                          withArguments:nil
+        QStatus status = [self.proxy callMethodWithName:@"IntrospectWithDescription"
+                                    onInterfaceWithName:@"org.allseen.Introspectable"
+                                          withArguments:args
                                             methodReply:&mr];
         
         self.methodReply = mr;
         
-
         if(ER_OK == status) {
             
-            NSLog(@"Got it: %@", [self.methodReply xmlDescription]);
+            NSString *xmlString = [self.methodReply xmlDescription];
             
-            for(NSUInteger i=0; i<[self.methodReply arguments].count; i++) {
-                AJNMessageArgument *arg = [[self.methodReply arguments] objectAtIndex:i];
-                
-                const char *variable;
-                status = [arg value:@"s", &variable];
-                
-                NSString *stringvalue = [NSString stringWithUTF8String:variable];
-                
-                NSLog(@"Unique bus name: %@", stringvalue);
-            }
+//            <message>
+//                <body>
+//                    <string>
+//                        <node>
+//                            <method name="GetAboutData">
+//                                <arg name="languageTag" type="s" direction="in"/>
+//                                <arg name="aboutData" type="a{sv}" direction="out"/>
+//                            </method>
+            
 
+            
         } else {
             NSLog(@"ERR");
         }
