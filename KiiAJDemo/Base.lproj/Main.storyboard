@@ -137,8 +137,27 @@
                     <view key="view" contentMode="scaleToFill" id="D4R-As-y2F">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4nJ-0t-RlO">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="TnP-dz-dBw" id="z5o-qF-ZsV"/>
+                                    <outlet property="delegate" destination="TnP-dz-dBw" id="qWP-r7-WFX"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zPi-WO-98w" firstAttribute="top" secondItem="4nJ-0t-RlO" secondAttribute="bottom" id="0W9-Zk-Fmv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4nJ-0t-RlO" secondAttribute="trailing" constant="-16" id="E8k-B8-SY7"/>
+                            <constraint firstItem="4nJ-0t-RlO" firstAttribute="leading" secondItem="D4R-As-y2F" secondAttribute="leadingMargin" constant="-16" id="iFe-bV-1HR"/>
+                            <constraint firstItem="4nJ-0t-RlO" firstAttribute="top" secondItem="t13-OK-cXE" secondAttribute="bottom" id="ttx-X8-2j2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="4nJ-0t-RlO" id="tp2-k0-jzL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zUM-D2-XVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

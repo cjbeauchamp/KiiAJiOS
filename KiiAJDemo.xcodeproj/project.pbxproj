@@ -12,6 +12,12 @@
 		164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */; };
 		164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */; };
 		164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D4B621B66B9F6005E5FDC /* NotificationViewController.m */; };
+		16AADBE91B69EB9600BE3530 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AADBE81B69EB9600BE3530 /* libz.dylib */; };
+		16AADBEB1B69EB9C00BE3530 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AADBEA1B69EB9C00BE3530 /* libxml2.dylib */; };
+		16AADBF11B69EDD500BE3530 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AADBF01B69EDD500BE3530 /* XMLDictionary.m */; };
+		16AADBF41B69F26B00BE3530 /* InterfaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AADBF31B69F26B00BE3530 /* InterfaceObject.m */; };
+		16AADBF71B69F2A000BE3530 /* InterfaceMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AADBF61B69F2A000BE3530 /* InterfaceMethod.m */; };
+		16AADBFA1B69F4A700BE3530 /* InterfaceArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AADBF91B69F4A700BE3530 /* InterfaceArgument.m */; };
 		16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AF8B811B696AAA0036C426 /* ServiceViewController.m */; };
 		16B7A9B01B668AD20067C951 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9AF1B668AD20067C951 /* main.m */; };
 		16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9B21B668AD20067C951 /* AppDelegate.m */; };
@@ -60,6 +66,16 @@
 		164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		164D4B611B66B9F6005E5FDC /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		164D4B621B66B9F6005E5FDC /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		16AADBE81B69EB9600BE3530 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		16AADBEA1B69EB9C00BE3530 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		16AADBEF1B69EDD500BE3530 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		16AADBF01B69EDD500BE3530 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		16AADBF21B69F26B00BE3530 /* InterfaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceObject.h; sourceTree = "<group>"; };
+		16AADBF31B69F26B00BE3530 /* InterfaceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceObject.m; sourceTree = "<group>"; };
+		16AADBF51B69F2A000BE3530 /* InterfaceMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceMethod.h; sourceTree = "<group>"; };
+		16AADBF61B69F2A000BE3530 /* InterfaceMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceMethod.m; sourceTree = "<group>"; };
+		16AADBF81B69F4A700BE3530 /* InterfaceArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceArgument.h; sourceTree = "<group>"; };
+		16AADBF91B69F4A700BE3530 /* InterfaceArgument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceArgument.m; sourceTree = "<group>"; };
 		16AF8B801B696AAA0036C426 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		16AF8B811B696AAA0036C426 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		16B7A9AA1B668AD20067C951 /* KiiAJDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiiAJDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16AADBEB1B69EB9C00BE3530 /* libxml2.dylib in Frameworks */,
+				16AADBE91B69EB9600BE3530 /* libz.dylib in Frameworks */,
 				164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */,
 				16B7A9F31B668E730067C951 /* UIKit.framework in Frameworks */,
 				16B7A9E31B668C470067C951 /* libc++.dylib in Frameworks */,
@@ -152,6 +170,8 @@
 		16B7A9AC1B668AD20067C951 /* KiiAJDemo */ = {
 			isa = PBXGroup;
 			children = (
+				16AADBEF1B69EDD500BE3530 /* XMLDictionary.h */,
+				16AADBF01B69EDD500BE3530 /* XMLDictionary.m */,
 				16B7A9F51B668F9A0067C951 /* Notification */,
 				1647E54C1B69421E00E0E414 /* ConnectedService.h */,
 				1647E54D1B69421E00E0E414 /* ConnectedService.m */,
@@ -164,6 +184,12 @@
 				16B7A9BA1B668AD20067C951 /* Main.storyboard */,
 				16B7A9BD1B668AD20067C951 /* Images.xcassets */,
 				16B7A9AD1B668AD20067C951 /* Supporting Files */,
+				16AADBF21B69F26B00BE3530 /* InterfaceObject.h */,
+				16AADBF31B69F26B00BE3530 /* InterfaceObject.m */,
+				16AADBF51B69F2A000BE3530 /* InterfaceMethod.h */,
+				16AADBF61B69F2A000BE3530 /* InterfaceMethod.m */,
+				16AADBF81B69F4A700BE3530 /* InterfaceArgument.h */,
+				16AADBF91B69F4A700BE3530 /* InterfaceArgument.m */,
 			);
 			path = KiiAJDemo;
 			sourceTree = "<group>";
@@ -197,6 +223,8 @@
 		16B7A9F41B668F1D0067C951 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16AADBEA1B69EB9C00BE3530 /* libxml2.dylib */,
+				16AADBE81B69EB9600BE3530 /* libz.dylib */,
 				164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */,
 				164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */,
 				164D4B5B1B6692C5005E5FDC /* BundledRouter.o */,
@@ -337,12 +365,16 @@
 			files = (
 				1647E5511B69447700E0E414 /* DeviceListViewController.m in Sources */,
 				16B7A9B31B668AD20067C951 /* AppDelegate.m in Sources */,
+				16AADBF41B69F26B00BE3530 /* InterfaceObject.m in Sources */,
 				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
 				164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */,
 				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
 				16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */,
+				16AADBF11B69EDD500BE3530 /* XMLDictionary.m in Sources */,
 				1647E54E1B69421E00E0E414 /* ConnectedService.m in Sources */,
 				16B7A9B01B668AD20067C951 /* main.m in Sources */,
+				16AADBF71B69F2A000BE3530 /* InterfaceMethod.m in Sources */,
+				16AADBFA1B69F4A700BE3530 /* InterfaceArgument.m in Sources */,
 				16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +505,7 @@
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				HEADER_SEARCH_PATHS = (
+					"$(SDK_DIR)/usr/include/libxml2",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/$(PLATFORM_NAME)/$(CONFIGURATION)/dist/cpp/inc",
@@ -497,10 +530,12 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
+					"$(inherited)",
 					"-DQCC_OS_GROUP_POSIX",
 					"-DQCC_OS_DARWIN",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-lcrypto",
 					"-lssl",
 					"-lBundledRouter.o",
@@ -509,6 +544,7 @@
 					"-lalljoyn_controlpanel_objc",
 					"-lalljoyn_controlpanel_cpp",
 				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bcb5f037-e37b-4b4f-b504-3d1c56faaf65";
 				VALID_ARCHS = "armv7 i386";
@@ -542,12 +578,15 @@
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/about/lib",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib\" /Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/lib \"$(SRCROOT)/../../Frameworks/openssl/build\" /Users/chrisbeauchamp/Code/Frameworks/openssl/build \"$(SRCROOT)/../../Frameworks/openssl/build\" \"$(SRCROOT)/../../Frameworks/openssl/build\" /Users/chrisbeauchamp/Code/Frameworks/openssl/build",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
+					"$(inherited)",
 					"-DQCC_OS_GROUP_POSIX",
 					"-DQCC_OS_DARWIN",
 					"-DNS_BLOCK_ASSERTIONS=1",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-lcrypto",
 					"-lssl",
 					"-lBundledRouter.o",
@@ -556,6 +595,7 @@
 					"-lalljoyn_controlpanel_objc",
 					"-lalljoyn_controlpanel_cpp",
 				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bcb5f037-e37b-4b4f-b504-3d1c56faaf65";
 				VALID_ARCHS = "armv7 i386";

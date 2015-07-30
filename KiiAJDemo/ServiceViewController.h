@@ -10,7 +10,9 @@
 
 @class ConnectedService;
 @interface ServiceViewController : UIViewController
+<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) ConnectedService *service;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end
