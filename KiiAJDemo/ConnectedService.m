@@ -17,6 +17,7 @@
 #import "InterfaceMethod.h"
 #import "InterfaceArgument.h"
 #import "NSString+StripTags.h"
+#import "ServicePathObject.h"
 
 #import "XMLDictionary.h"
 
@@ -26,7 +27,6 @@
 
 @property (nonatomic, assign) AJNSessionId sessionID;
 
-@property (nonatomic, strong) NSMutableArray *interfaceObjects;
 @property (nonatomic, strong) NSMutableDictionary *proxies;
 @property (nonatomic, strong) AJNMessage *methodReply;
 
@@ -37,7 +37,7 @@
 - (id) init
 {
     self = [super init];
-    self.interfaceObjects = [[NSMutableArray alloc] init];
+    self.pathObjects = [[NSMutableArray alloc] init];
     self.proxies = [[NSMutableDictionary alloc] init];
     return self;
 }
@@ -71,6 +71,26 @@
 
 }
 
+- (InterfaceObject*) addInterface:(NSString*)interfaceName
+               atPath:(NSString*)path
+{
+    ServicePathObject *pathObj = nil;
+    for(ServicePathObject *o in self.pathObjects) {
+        
+        if([o.name isEqualToString:path]) {
+            pathObj = o;
+        }
+    }
+    
+    if(pathObj == nil) {
+        pathObj = [[ServicePathObject alloc] init];
+        pathObj.name = path;
+        [self.pathObjects addObject:pathObj];
+    }
+    
+    return [pathObj addInterface:interfaceName];
+}
+
 - (void) connect
 {
     [[AppDelegate sharedDelegate].busAttachment enableConcurrentCallbacks];
@@ -93,10 +113,10 @@
                                                                transportMask:kAJNTransportMaskAny];
     
     self.sessionID = [[AppDelegate sharedDelegate].busAttachment joinSessionWithName:self.busName
-                                                                              onPort:900
+                                                                              onPort:25
                                                                         withDelegate:nil
                                                                              options:opts];
-    
+
     if(self.sessionID != 0) {
         
         for(NSString *path in self.interfacePaths.allKeys) {
@@ -107,28 +127,21 @@
                                                                             serviceName:self.busName
                                                                              objectPath:path
                                                                               sessionId:self.sessionID];
-            
+
             [self.proxies setObject:proxy forKey:path];
             
             [proxy introspectRemoteObject];
             
             for(AJNInterfaceDescription *interface in [proxy interfaces]) {
                 
-                InterfaceObject *o = [[InterfaceObject alloc] init];
-                o.name = interface.name;
-                o.path = path;
-                
+                InterfaceObject *interfaceObj = [self addInterface:interface.name atPath:path];
+
                 NSLog(@"Interface: %@", interface.name);
                 for(AJNInterfaceMember *member in interface.members) {
                     
                     NSLog(@"member: %@", member.name);
-                    
-                    InterfaceMethod *method = [[InterfaceMethod alloc] init];
-                    method.name = member.name;
-                    [o.methods addObject:method];
+                    [interfaceObj addMethod:member.name];
                 }
-                
-                [self.interfaceObjects addObject:o];
             }
             
             KiiBucket *bucket = [Kii bucketWithName:@"localDevices"];
@@ -138,19 +151,20 @@
             [object setObject:self.appID forKey:@"appID"];
             [object setObject:self.deviceID forKey:@"deviceID"];
             [object setObject:self.manufacturer forKey:@"manufacturer"];
-            
+
             NSMutableArray *arr = [NSMutableArray array];
-            for(InterfaceObject *o in self.interfaceObjects) {
+            for(ServicePathObject *o in self.pathObjects) {
                 [arr addObject:[o dictValue]];
             }
             [object setObject:arr forKey:@"interfaces"];
             
-            [object saveAllFields:YES withBlock:^(KiiObject *object, NSError *error) {
+            NSLog(@"SAving interfaces for device: %@ => %@", self.deviceName, arr);
+            
+            [object saveAllFields:YES
+                        withBlock:^(KiiObject *object, NSError *error) {
                 NSLog(@"Object saved: %@", error);
             }];
         }
-       
-//        [[AppDelegate sharedDelegate].busAttachment leaveJoinedSession:self.sessionID];
         
     } else {
         NSLog(@"Connection err");

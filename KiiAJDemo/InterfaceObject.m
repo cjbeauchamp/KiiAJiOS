@@ -19,10 +19,26 @@
     return self;
 }
 
+- (void) addMethod:(NSString*)methodName
+{
+    BOOL found = FALSE;
+    for(InterfaceMethod *m in self.methods) {
+        if([m.name isEqualToString:methodName]) {
+            found = TRUE;
+        }
+    }
+    
+    if(!found) {
+        InterfaceMethod *m = [[InterfaceMethod alloc] init];
+        m.name = methodName;
+        m.interfaceName = self.name;
+        [self.methods addObject:m];
+    }
+}
+
 - (NSDictionary*) dictValue
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:self.name forKey:@"name"];
-    [dict setObject:self.path forKey:@"path"];
     
     NSMutableArray *arr = [NSMutableArray array];
     for(InterfaceMethod *m in self.methods) {

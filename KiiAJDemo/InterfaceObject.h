@@ -11,9 +11,9 @@
 @interface InterfaceObject : NSObject
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *path;
 @property (nonatomic, strong) NSMutableArray *methods;
 
 - (NSDictionary*) dictValue;
+- (void) addMethod:(NSString*)methodName;
 
 @end

@@ -43,6 +43,7 @@
 		16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B7A9F91B668FA40067C951 /* NotificationEntry.m */; };
 		16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16B7AA011B668FA40067C951 /* NotificationUtils.mm */; };
 		16B905781B6A645A00D26414 /* NSString+StripTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B905771B6A645A00D26414 /* NSString+StripTags.m */; };
+		16B9057E1B6AB52600D26414 /* ServicePathObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B9057D1B6AB52600D26414 /* ServicePathObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		16B7AA011B668FA40067C951 /* NotificationUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NotificationUtils.mm; sourceTree = "<group>"; };
 		16B905761B6A645A00D26414 /* NSString+StripTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripTags.h"; sourceTree = "<group>"; };
 		16B905771B6A645A00D26414 /* NSString+StripTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripTags.m"; sourceTree = "<group>"; };
+		16B9057C1B6AB52600D26414 /* ServicePathObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePathObject.h; sourceTree = "<group>"; };
+		16B9057D1B6AB52600D26414 /* ServicePathObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePathObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,8 @@
 				16B7A9BA1B668AD20067C951 /* Main.storyboard */,
 				16B7A9BD1B668AD20067C951 /* Images.xcassets */,
 				16B7A9AD1B668AD20067C951 /* Supporting Files */,
+				16B9057C1B6AB52600D26414 /* ServicePathObject.h */,
+				16B9057D1B6AB52600D26414 /* ServicePathObject.m */,
 				16AADBF21B69F26B00BE3530 /* InterfaceObject.h */,
 				16AADBF31B69F26B00BE3530 /* InterfaceObject.m */,
 				16AADBF51B69F2A000BE3530 /* InterfaceMethod.h */,
@@ -382,6 +387,7 @@
 				16AADBF71B69F2A000BE3530 /* InterfaceMethod.m in Sources */,
 				16AADBFA1B69F4A700BE3530 /* InterfaceArgument.m in Sources */,
 				16B7AA021B668FA40067C951 /* DetailsCell.m in Sources */,
+				16B9057E1B6AB52600D26414 /* ServicePathObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

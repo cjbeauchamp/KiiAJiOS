@@ -1,5 +1,5 @@
 //
-//  InterfaceMethod.h
+//  ServicePathObject.h
 //  KiiAJDemo
 //
 //  Created by Chris Beauchamp on 7/30/15.
@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface InterfaceMethod : NSObject
+@class InterfaceObject;
+@interface ServicePathObject : NSObject
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *interfaceName;
-@property (nonatomic, strong) NSMutableArray *arguments;
+@property (nonatomic, strong) NSMutableArray *interfaces;
 
 - (NSDictionary*) dictValue;
+- (InterfaceObject*) addInterface:(NSString*)interfaceName;
 
 @end

@@ -18,7 +18,12 @@
 @property (nonatomic, strong) NSString *busName;
 @property (nonatomic, strong) NSDictionary *interfacePaths;
 
+@property (nonatomic, strong) NSMutableArray *pathObjects;
+
 - (void) connect;
-- (void) run:(NSString*)method onInterface:(NSString*)interface usingPath:(NSString*)usingPath;
+
+- (void) run:(NSString*)method
+ onInterface:(NSString*)interface
+   usingPath:(NSString*)usingPath;
 
 @end

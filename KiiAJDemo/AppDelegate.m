@@ -36,7 +36,7 @@ static NSString * const DEVICE_NAME_PRODUCER= @"KiiProducer";
 static NSString * const DEFAULT_LANG_PRODUCER= @"en";
 static NSString * const RICH_ICON_OBJECT_PATH= @"rich/Icon/Object/Path";
 static NSString * const RICH_AUDIO_OBJECT_PATH= @"rich/Audio/Object/Path";
-static short const SERVICE_PORT= 900;
+static short const SERVICE_PORT= 25;
 
 static const uint16_t TTL_MIN = 30;
 static const uint16_t TTL_MAX = 43200;
