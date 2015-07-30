@@ -394,14 +394,14 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
         [self.busAttachment destroy];
         return ER_FAIL;
     }
-    
-    if (authListener) {
-        status = [self.busAttachment enablePeerSecurity:@"ALLJOYN_PIN_KEYX ALLJOYN_SRP_KEYX ALLJOYN_ECDHE_PSK" authenticationListener:authListener];
-        if (status != ER_OK) {
-            [self.busAttachment destroy];
-            return ER_FAIL;
-        }
-    }
+//    
+//    if (authListener) {
+//        status = [self.busAttachment enablePeerSecurity:@"ALLJOYN_PIN_KEYX ALLJOYN_SRP_KEYX ALLJOYN_ECDHE_PSK" authenticationListener:authListener];
+//        if (status != ER_OK) {
+//            [self.busAttachment destroy];
+//            return ER_FAIL;
+//        }
+//    }
     
     // advertise Daemon
     status = [self.busAttachment requestWellKnownName:DAEMON_NAME withFlags:kAJNBusNameFlagDoNotQueue];

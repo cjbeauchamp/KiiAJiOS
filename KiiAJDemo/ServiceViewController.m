@@ -14,10 +14,12 @@
 #import "ConnectedService.h"
 
 @interface ServiceViewController ()
-<AJNSessionListener, AJNProxyBusObjectDelegate>
+<AJNSessionListener, AJNProxyBusObjectDelegate, AJNSessionDelegate>
 
+@property (nonatomic, strong) AJNMessage *methodReply;
 @property (nonatomic, strong) AJNProxyBusObject *basicObjectProxy;
 @property (nonatomic, assign) AJNSessionId sessionID;
+@property (nonatomic, strong) AJNProxyBusObject *proxy;
 
 @end
 
@@ -37,42 +39,74 @@
 {
     [super viewDidAppear:animated];
     
-    NSString *serviceName = self.service.busName;
     
-    
+    [[AppDelegate sharedDelegate].busAttachment enableConcurrentCallbacks];
+
     AJNSessionOptions *opts = [[AJNSessionOptions alloc] initWithTrafficType:kAJNTrafficMessages
                                                           supportsMultipoint:YES
                                                                    proximity:kAJNProximityAny
                                                                transportMask:kAJNTransportMaskAny];
-    
-    self.sessionID = [[AppDelegate sharedDelegate].busAttachment joinSessionWithName:serviceName
-                                                                                      onPort:900
-                                                                                withDelegate:self
-                                                                                     options:opts];
 
-    NSLog(@"Session id: %du", self.sessionID);
-    
-    AJNProxyBusObject *proxy = [[AJNProxyBusObject alloc] initWithBusAttachment:[AppDelegate sharedDelegate].busAttachment
-                                                                    serviceName:serviceName
-                                                                     objectPath:@"/"
-                                                                      sessionId:self.sessionID];
-    
-    
-    // get a description of the interfaces implemented by the remote object before making the call
-    //
-    QStatus err = [proxy introspectRemoteObject];
-    if(err == ER_OK) {
-        NSLog(@"Got introspection");
-        NSLog(@"Interfaces: %@", [proxy interfaces]);
+    self.sessionID = [[AppDelegate sharedDelegate].busAttachment joinSessionWithName:self.service.busName
+                                                                              onPort:900
+                                                                        withDelegate:nil
+                                                                             options:opts];
+
+    if(self.sessionID != 0) {
         
-        for(AJNInterfaceDescription *d in [proxy interfaces]) {
-            NSLog(@"XML => %@", [d xmlDescription]);
+        self.proxy = [[AJNProxyBusObject alloc] initWithBusAttachment:[AppDelegate sharedDelegate].busAttachment
+                                                          serviceName:self.service.busName
+                                                           objectPath:@"/About"
+                                                            sessionId:self.sessionID];
+        
+        [self.proxy introspectRemoteObject];
+        
+        for(AJNInterfaceDescription *interface in [self.proxy interfaces]) {
+            NSLog(@"Interface: %@", interface.name);
+            for(AJNInterfaceMember *member in interface.members) {
+                NSLog(@"member: %@", member.name);
+            }
         }
         
+//        AJNMessageArgument *language = [[AJNMessageArgument alloc] init];
+//        [language setValue:@"s", ""];
+//        [language stabilize];
+//        NSArray *args = [[NSArray alloc] initWithObjects:language, nil];
+        
+        AJNMessage *mr = [[AJNMessage alloc] init];
+        QStatus status = [self.proxy callMethodWithName:@"Introspect" // IntrospectWithDescription
+                                    onInterfaceWithName:@"org.freedesktop.DBus.Introspectable" //org.allseen.Introspectable
+                                          withArguments:nil
+                                            methodReply:&mr];
+        
+        self.methodReply = mr;
+        
+
+        if(ER_OK == status) {
+            
+            NSLog(@"Got it: %@", [self.methodReply xmlDescription]);
+            
+            for(NSUInteger i=0; i<[self.methodReply arguments].count; i++) {
+                AJNMessageArgument *arg = [[self.methodReply arguments] objectAtIndex:i];
+                
+                const char *variable;
+                status = [arg value:@"s", &variable];
+                
+                NSString *stringvalue = [NSString stringWithUTF8String:variable];
+                
+                NSLog(@"Unique bus name: %@", stringvalue);
+            }
+
+        } else {
+            NSLog(@"ERR");
+        }
+        
+        NSLog(@"Here");
+        
     } else {
-        NSLog(@"ERR!: %d", err);
+        NSLog(@"Connection err");
     }
-    
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -111,7 +145,10 @@
 
 - (void)didReceiveMethodReply:(AJNMessage *)replyMessage context:(AJNHandle)context
 {
-    
+    NSLog(@"Replymessage: %@", replyMessage);
+    for(AJNMessageArgument *arg in [replyMessage arguments]) {
+        NSLog(@"AXML => %@", [arg xml]);
+    }
 }
 
 - (void)didReceiveValueForProperty:(AJNMessageArgument *)value ofObject:(AJNProxyBusObject *)object completionStatus:(QStatus)status context:(AJNHandle)context
