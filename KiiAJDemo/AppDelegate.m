@@ -902,7 +902,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 //            
 //        }
 //    }
-//    NSLog(@"AJNBusListener::nameOwnerChanged:%@ to:%@ from:%@", name, newOwner, previousOwner);
+    NSLog(@"AJNBusListener::nameOwnerChanged:%@ to:%@ from:%@", name, newOwner, previousOwner);
 //    [self.busAttachment findAdvertisedName:name];
 }
 
