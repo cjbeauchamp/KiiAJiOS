@@ -28,7 +28,12 @@
 #import "ConnectedService.h"
 #import "DeviceListViewController.h"
 
-static NSString * const DEFAULT_APP_NAME = @"KiiBase";
+#import "LSFLightingDirector.h"
+#import "LSFLamp.h"
+#import "LSFGroup.h"
+#import "LSFLightingScene.h"
+
+static NSString * const DEFAULT_APP_NAME = @"KiiHub";
 static NSString * const DAEMON_QUIET_PREFIX = @"quiet@"; // For tcl
 static NSString * const DAEMON_NAME = @"org.alljoyn.BusNode.KiiService"; // For tcl
 static NSString * const DEVICE_ID_PRODUCER= @"kii-base-ipad-1";
@@ -450,11 +455,54 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
     NSLog(@"Error: %@", error);
     
     // Subscribe to a bucket
-    [KiiPushSubscription subscribeSynchronous:[Kii bucketWithName:@"messages"] withError:&error];
+    [[KiiUser currentUser].pushSubscription subscribeSynchronous:[Kii bucketWithName:@"messages"]
+                                                           error:&error];
     NSLog(@"Error: %@", error);
     
-    [KiiPushSubscription subscribeSynchronous:[Kii bucketWithName:@"commands"] withError:&error];
+    [[KiiUser currentUser].pushSubscription subscribeSynchronous:[Kii bucketWithName:@"commands"]
+                                                           error:&error];
     NSLog(@"Error: %@", error);
+    
+//    NSString* thingType = @"camera";
+//    KiiThingFields* thingFields = [[KiiThingFields alloc] init];
+//    thingFields.vendor = @"Kii";
+//    KiiThing* thing = [KiiThing registerThingSynchronous:@"ipcam8455"
+//                                                password:@"password"
+//                                                    type:thingType
+//                                                  fields:thingFields
+//                                                   error:&error];
+//
+//    NSLog(@"Error: %@", error);
+//
+//    [thing registerOwnerSynchronous:[KiiUser currentUser]
+//                              error:&error];
+//    NSLog(@"Error: %@", error);
+    
+    
+    
+    KiiThing* thing = [KiiThing loadSynchronousWithVendorThingID:@"childTracker"
+                                                           error:&error];
+    NSLog(@"Error: %@", error);
+    
+    KiiBucket* thingBucket = [thing bucketWithName:@"data"];
+    [[KiiUser currentUser].pushSubscription subscribeSynchronous:thingBucket
+                                                           error:&error];
+    NSLog(@"Error: %@", error);
+
+    
+    
+    KiiThing *camera = [KiiThing loadSynchronousWithVendorThingID:@"ipcam8455"
+                                                            error:&error];
+    NSLog(@"Error: %@", error);
+    
+    KiiBucket *videoBucket = [camera bucketWithName:@"Videos"];
+    KiiBucket *eventBucket = [camera bucketWithName:@"Events"];
+    [[KiiUser currentUser].pushSubscription subscribeSynchronous:videoBucket
+                                                           error:&error];
+    [[KiiUser currentUser].pushSubscription subscribeSynchronous:eventBucket
+                                                           error:&error];
+    NSLog(@"Error: %@", error);
+
     
     
     // Register APNS
@@ -477,6 +525,10 @@ static NSString *const DEFAULT_MSG_TYPE = @"INFO";
 
     [self setupNotification];
     
+    self.lightingDirector = [[LSFLightingDirector alloc] init];
+    [self.lightingDirector postOnNextControllerConnection: self];
+    [self.lightingDirector start];
+
     return YES;
 }
 
@@ -501,34 +553,78 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         
         NSString *bucket = userInfo[@"bi"];
         NSString *itemID = userInfo[@"oi"];
+        NSString *uri = userInfo[@"sur"];
         
-        [[KiiObject objectWithURI:[NSString stringWithFormat:@"kiicloud://buckets/%@/objects/%@", bucket, itemID]] refreshWithBlock:^(KiiObject *object, NSError *error) {
-            if(error == nil) {
-                
-                [object describe];
-
-                if([bucket isEqualToString:@"messages"]) {
-                    
-                    // add it to our log
-                    
-                    // kick it over to the pi
-                    [self sendNotification:[object getObjectForKey:@"body"]];
-                }
-                
-                else if([bucket isEqualToString:@"commands"]) {
-                    
-                    [self sendCommand:[object getObjectForKey:@"method"]
-                          toInterface:[object getObjectForKey:@"interface"]
-                             onDevice:[object getObjectForKey:@"deviceID"]
-                            usingPath:[object getObjectForKey:@"path"]];
-                }
-
-            } else {
-                NSLog(@"error retrieving kiiobject: %@", error);
-            }
-        }];
-
+        if(uri == nil) {
+            uri = [NSString stringWithFormat:@"kiicloud://buckets/%@/objects/%@", bucket, itemID];
+        }
         
+        if([bucket isEqualToString:@"data"]) {
+            
+            [KiiThing loadWithVendorThingID:@"childTracker"
+                                      block:^(KiiThing *thing, NSError *error) {
+                                          
+                                          if(error == nil) {
+                                              
+                                              KiiBucket* bucket = [thing bucketWithName:@"data"];
+                                              KiiQuery *query = [KiiQuery queryWithClause:nil];
+                                              [query setLimit:1];
+                                              [query sortByDesc:@"_created"];
+                                              
+                                              [bucket executeQuery:query
+                                                         withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
+                                                             for(KiiObject *o in results) {
+                                                                 NSDictionary *vals = [o getObjectForKey:@"values"];
+                                                                 
+                                                                 // trigger an update
+                                                                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTrackerUpdate
+                                                                                                                     object:nil
+                                                                                                                   userInfo:vals];
+                                                             }
+                                                         }];
+                                              
+                                          }
+                                      }];
+            
+        } else {
+            [[KiiObject objectWithURI:uri]
+             refreshWithBlock:^(KiiObject *object, NSError *error) {
+                 if(error == nil) {
+                     
+                     [object describe];
+                     
+                     if([bucket isEqualToString:@"messages"]) {
+                         
+                         // kick it across the network
+                         [self sendNotification:[object getObjectForKey:@"body"]];
+                     }
+                     
+                     else if([bucket isEqualToString:@"commands"]) {
+                         
+                         if([[object getObjectForKey:@"interface"] isEqualToString:@"kii-bulb"]) {
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLightEvent
+                                                                                 object:nil
+                                                                               userInfo:@{
+                                                                                          @"method":[object getObjectForKey:@"method"],
+                                                                                          @"value":[object getObjectForKey:@"value"]
+                                                                                          }];
+                             
+                         } else {
+                             [self sendCommand:[object getObjectForKey:@"method"]
+                                   toInterface:[object getObjectForKey:@"interface"]
+                                      onDevice:[object getObjectForKey:@"deviceID"]
+                                     usingPath:[object getObjectForKey:@"path"]];
+                         }
+                         
+                     }
+                     
+                 } else {
+                     NSLog(@"error retrieving kiiobject: %@", error);
+                 }
+             }];
+        }
+
     }
 
 }
@@ -828,6 +924,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     NSLog(@"About data: %@", *aboutData);
     NSLog(@"Descs: %@", objectDescs);
+    NSLog(@"Service port: %d", port);
     
     dispatch_sync(self.annBtnCreationQueue, ^{
         
@@ -850,6 +947,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         newService.manufacturer = [[manufacturer xml] stripTags];
         newService.interfacePaths = objectDescs;
         newService.busName = busName;
+        newService.port = port;
 
         BOOL has = FALSE;
         
@@ -869,8 +967,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             dispatch_queue_t myQueue = dispatch_queue_create([newService.deviceID cStringUsingEncoding:NSUTF8StringEncoding], NULL);
             dispatch_async(myQueue, ^{
                 
-                // Perform long running process
-                [newService connect];
+                // TODO: remove for introspecting
+//                [newService connect];
             });
 
             
@@ -926,6 +1024,16 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                  fromSession:(AJNSessionId)sessionId
 {
     
+}
+
+/*
+ * Some_Callback_Delegate implementation
+ */
+-(void)onNextControllerConnection
+{
+    NSLog(@"LSFTutorialViewController - onNextControllerConnection() executing");
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLightingControllerFound object:nil];
 }
 
 @end

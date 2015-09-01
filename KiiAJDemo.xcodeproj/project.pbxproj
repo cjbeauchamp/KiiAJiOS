@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161445761B8F6762005A01E2 /* LightingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 161445751B8F6762005A01E2 /* LightingViewController.m */; };
+		16231D1D1B95BB5F009317DE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16231D1C1B95BB5F009317DE /* MapKit.framework */; };
+		16231D1F1B95BB7F009317DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16231D1E1B95BB7F009317DE /* CoreLocation.framework */; };
 		1647E54E1B69421E00E0E414 /* ConnectedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647E54D1B69421E00E0E414 /* ConnectedService.m */; };
 		1647E5511B69447700E0E414 /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647E5501B69447700E0E414 /* DeviceListViewController.m */; };
+		164CDE511B92354200F2320F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164CDE501B92354200F2320F /* WebViewController.m */; };
+		164CDE541B9235AD00F2320F /* TrackingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164CDE531B9235AD00F2320F /* TrackingViewController.m */; };
 		164D4B5E1B66A0C5005E5FDC /* KiiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5D1B66A0C5005E5FDC /* KiiSDK.framework */; };
 		164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */; };
 		164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D4B621B66B9F6005E5FDC /* NotificationViewController.m */; };
@@ -57,10 +62,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		161445741B8F6762005A01E2 /* LightingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightingViewController.h; sourceTree = "<group>"; };
+		161445751B8F6762005A01E2 /* LightingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightingViewController.m; sourceTree = "<group>"; };
+		16231D1C1B95BB5F009317DE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		16231D1E1B95BB7F009317DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1647E54C1B69421E00E0E414 /* ConnectedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedService.h; sourceTree = "<group>"; };
 		1647E54D1B69421E00E0E414 /* ConnectedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedService.m; sourceTree = "<group>"; };
 		1647E54F1B69447700E0E414 /* DeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListViewController.h; sourceTree = "<group>"; };
 		1647E5501B69447700E0E414 /* DeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
+		164CDE4F1B92354200F2320F /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		164CDE501B92354200F2320F /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		164CDE521B9235AD00F2320F /* TrackingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackingViewController.h; sourceTree = "<group>"; };
+		164CDE531B9235AD00F2320F /* TrackingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackingViewController.m; sourceTree = "<group>"; };
 		164D4B571B669290005E5FDC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../Frameworks/openssl/build/libcrypto.a; sourceTree = "<group>"; };
 		164D4B581B669290005E5FDC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../Frameworks/openssl/build/libssl.a; sourceTree = "<group>"; };
 		164D4B5B1B6692C5005E5FDC /* BundledRouter.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = BundledRouter.o; path = "../../Frameworks/alljoyn-ios/core/alljoyn/build/darwin/arm/iphoneos/debug/dist/cpp/lib/BundledRouter.o"; sourceTree = "<group>"; };
@@ -122,6 +135,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16231D1F1B95BB7F009317DE /* CoreLocation.framework in Frameworks */,
+				16231D1D1B95BB5F009317DE /* MapKit.framework in Frameworks */,
 				16AADBEB1B69EB9C00BE3530 /* libxml2.dylib in Frameworks */,
 				16AADBE91B69EB9600BE3530 /* libz.dylib in Frameworks */,
 				164D4B601B66A0D7005E5FDC /* libsqlite3.dylib in Frameworks */,
@@ -176,6 +191,8 @@
 		16B7A9AC1B668AD20067C951 /* KiiAJDemo */ = {
 			isa = PBXGroup;
 			children = (
+				164CDE4F1B92354200F2320F /* WebViewController.h */,
+				164CDE501B92354200F2320F /* WebViewController.m */,
 				16AADBEF1B69EDD500BE3530 /* XMLDictionary.h */,
 				16AADBF01B69EDD500BE3530 /* XMLDictionary.m */,
 				16B7A9F51B668F9A0067C951 /* Notification */,
@@ -200,6 +217,10 @@
 				16AADBF91B69F4A700BE3530 /* InterfaceArgument.m */,
 				16B905761B6A645A00D26414 /* NSString+StripTags.h */,
 				16B905771B6A645A00D26414 /* NSString+StripTags.m */,
+				161445741B8F6762005A01E2 /* LightingViewController.h */,
+				161445751B8F6762005A01E2 /* LightingViewController.m */,
+				164CDE521B9235AD00F2320F /* TrackingViewController.h */,
+				164CDE531B9235AD00F2320F /* TrackingViewController.m */,
 			);
 			path = KiiAJDemo;
 			sourceTree = "<group>";
@@ -233,6 +254,8 @@
 		16B7A9F41B668F1D0067C951 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16231D1E1B95BB7F009317DE /* CoreLocation.framework */,
+				16231D1C1B95BB5F009317DE /* MapKit.framework */,
 				16AADBEA1B69EB9C00BE3530 /* libxml2.dylib */,
 				16AADBE81B69EB9600BE3530 /* libz.dylib */,
 				164D4B5F1B66A0D7005E5FDC /* libsqlite3.dylib */,
@@ -378,9 +401,12 @@
 				16AADBF41B69F26B00BE3530 /* InterfaceObject.m in Sources */,
 				16B7AA071B668FA40067C951 /* NotificationUtils.mm in Sources */,
 				164D4B631B66B9F6005E5FDC /* NotificationViewController.m in Sources */,
+				164CDE541B9235AD00F2320F /* TrackingViewController.m in Sources */,
 				16B7AA031B668FA40067C951 /* NotificationEntry.m in Sources */,
 				16AF8B821B696AAA0036C426 /* ServiceViewController.m in Sources */,
 				16AADBF11B69EDD500BE3530 /* XMLDictionary.m in Sources */,
+				164CDE511B92354200F2320F /* WebViewController.m in Sources */,
+				161445761B8F6762005A01E2 /* LightingViewController.m in Sources */,
 				1647E54E1B69421E00E0E414 /* ConnectedService.m in Sources */,
 				16B905781B6A645A00D26414 /* NSString+StripTags.m in Sources */,
 				16B7A9B01B668AD20067C951 /* main.m in Sources */,
@@ -526,6 +552,8 @@
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/inc",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/inc",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/objc/inc/alljoyn",
+					"\"$(SRCROOT)/../../../Frameworks/alljoyn-ios/LSFObjC/include/LSFObjC\"",
+					"\"$(SRCROOT)/../../../Frameworks/alljoyn-ios/LSFObjCHelper/include/LSFObjCHelper\"",
 				);
 				INFOPLIST_FILE = KiiAJDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -539,6 +567,8 @@
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-notification-14.12.00-rel/cpp/lib",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/objc/lib",
 					"/Users/chrisbeauchamp/Code/Frameworks/alljoyn-ios/services/alljoyn-controlpanel-14.12.00-rel/cpp/lib",
+					"\"$(SRCROOT)/../../../Frameworks/alljoyn-ios/LSFObjC/lib/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../../../Frameworks/alljoyn-ios/LSFObjCHelper/lib/Debug-iphoneos\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -555,6 +585,7 @@
 					"-lalljoyn",
 					"-lalljoyn_controlpanel_objc",
 					"-lalljoyn_controlpanel_cpp",
+					"-lLSFObjCHelper",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -606,6 +637,7 @@
 					"-lalljoyn",
 					"-lalljoyn_controlpanel_objc",
 					"-lalljoyn_controlpanel_cpp",
+					"-lLSFObjCHelper",
 				);
 				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

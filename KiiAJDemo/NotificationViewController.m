@@ -12,7 +12,7 @@
 #import "alljoyn/notification/AJNSNotification.h"
 
 @interface NotificationViewController()
-<UITextFieldDelegate>
+<UITextFieldDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -35,9 +35,23 @@
     [AppDelegate sharedDelegate].notificationVC = self;
 }
 
-- (IBAction) sendNotification:(id)sender
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [[AppDelegate sharedDelegate] sendNotification:@"Message from iPad"];
+    if(buttonIndex != alertView.cancelButtonIndex) {
+        NSString *message = [[alertView textFieldAtIndex:0] text];
+        [[AppDelegate sharedDelegate] sendNotification:message];
+    }
+}
+
+- (IBAction)composeAlert:(id)sender
+{
+    UIAlertView *alertViewChangeName=[[UIAlertView alloc]initWithTitle:@"Send Notification"
+                                                               message:@"Send a notification across the AllSeen network"
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Cancel"
+                                                     otherButtonTitles:@"Send",nil];
+    alertViewChangeName.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertViewChangeName show];
 }
 
 #pragma mark - UITableViewDataSource

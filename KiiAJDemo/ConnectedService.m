@@ -113,9 +113,11 @@
                                                                transportMask:kAJNTransportMaskAny];
     
     self.sessionID = [[AppDelegate sharedDelegate].busAttachment joinSessionWithName:self.busName
-                                                                              onPort:25
+                                                                              onPort:self.port
                                                                         withDelegate:nil
                                                                              options:opts];
+    
+    NSLog(@"Session for %@? %d", self.deviceName, self.sessionID);
 
     if(self.sessionID != 0) {
         

@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
-- (IBAction) sendNotification:(id)sender;
+- (IBAction)composeAlert:(id)sender;
 - (void) refreshTable;
 
 @end

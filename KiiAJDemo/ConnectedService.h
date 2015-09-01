@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *manufacturer;
 @property (nonatomic, strong) NSString *busName;
 @property (nonatomic, strong) NSDictionary *interfacePaths;
+@property (nonatomic, assign) u_int16_t port;
 
 @property (nonatomic, strong) NSMutableArray *pathObjects;
 
