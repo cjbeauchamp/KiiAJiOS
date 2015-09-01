@@ -166,7 +166,7 @@
         AJNMessage *mr = [[AJNMessage alloc] init];
         QStatus status = [self.proxy callMethodWithName:m.name
                                     onInterfaceWithName:m.interfaceName
-                                          withArguments:nil
+                                          withArguments:@[]
                                             methodReply:&mr];
         
         self.methodReply = mr;
