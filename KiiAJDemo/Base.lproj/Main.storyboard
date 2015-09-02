@@ -17,37 +17,106 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpv-fz-ol5">
-                                <rect key="frame" x="16" y="94" width="146" height="52"/>
-                                <state key="normal" title="Turn off">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7q1-H0-K9k">
+                                <rect key="frame" x="0.0" y="231" width="600" height="320"/>
                                 <connections>
-                                    <action selector="turnOff:" destination="HPb-jD-IZB" eventType="touchUpInside" id="Bnb-X8-xow"/>
+                                    <outlet property="delegate" destination="HPb-jD-IZB" id="FYW-Pc-B8u"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-Vu-eCF">
-                                <rect key="frame" x="16" y="160" width="146" height="54"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kii Station Light" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rar-Jj-IxH">
+                                <rect key="frame" x="16" y="33" width="122" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="7ZH-pV-HyX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Brightness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaA-KF-Ad5">
+                                <rect key="frame" x="16" y="78" width="122" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="er1-qN-hd8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLW-YF-wHv">
+                                <rect key="frame" x="535" y="28" width="51" height="31"/>
+                                <connections>
+                                    <action selector="lightPowerChanged:" destination="HPb-jD-IZB" eventType="valueChanged" id="VVi-X8-kjQ"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Color Temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeE-6I-rCk">
+                                <rect key="frame" x="16" y="124" width="122" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="knD-kC-lBo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="20" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ncP-TH-4qD">
+                                <rect key="frame" x="187" y="74" width="399" height="31"/>
+                                <connections>
+                                    <action selector="lightBrightnessChanged:" destination="HPb-jD-IZB" eventType="touchUpOutside" id="mVb-3k-1e0"/>
+                                    <action selector="lightBrightnessChanged:" destination="HPb-jD-IZB" eventType="touchUpInside" id="sP6-yb-ban"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9000" minValue="2700" maxValue="9000" translatesAutoresizingMaskIntoConstraints="NO" id="qkQ-9W-D0Z">
+                                <rect key="frame" x="187" y="120" width="399" height="31"/>
+                                <connections>
+                                    <action selector="lightTempChanged:" destination="HPb-jD-IZB" eventType="touchUpInside" id="Szb-bN-kgd"/>
+                                    <action selector="lightTempChanged:" destination="HPb-jD-IZB" eventType="touchUpOutside" id="cYd-Gi-n9p"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-Vu-eCF">
+                                <rect key="frame" x="205" y="167" width="191" height="32"/>
+                                <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="xIZ-R7-L1V"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="Flash">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="flash:" destination="HPb-jD-IZB" eventType="touchUpInside" id="Hic-hV-5Xd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGW-0v-poq">
-                                <rect key="frame" x="16" y="28" width="146" height="52"/>
-                                <state key="normal" title="Turn on">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="turnOn:" destination="HPb-jD-IZB" eventType="touchUpInside" id="was-B8-pbl"/>
+                                    <action selector="flash:" destination="HPb-jD-IZB" eventType="touchUpInside" id="ulI-NP-b9J"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PaA-KF-Ad5" firstAttribute="leading" secondItem="ymM-JR-fsI" secondAttribute="leadingMargin" id="1Bx-Uu-Tl3"/>
+                            <constraint firstItem="ncP-TH-4qD" firstAttribute="top" secondItem="iLW-YF-wHv" secondAttribute="bottom" constant="15" id="1PT-NY-OOx"/>
+                            <constraint firstItem="7q1-H0-K9k" firstAttribute="leading" secondItem="ymM-JR-fsI" secondAttribute="leadingMargin" constant="-16" id="1iw-sH-f6b"/>
+                            <constraint firstItem="L8A-G1-Kgf" firstAttribute="top" secondItem="7q1-H0-K9k" secondAttribute="bottom" id="9yi-A7-q3f"/>
+                            <constraint firstItem="PaA-KF-Ad5" firstAttribute="top" secondItem="Rar-Jj-IxH" secondAttribute="bottom" constant="24" id="FXZ-MN-ixE"/>
+                            <constraint firstItem="7q1-H0-K9k" firstAttribute="top" secondItem="PoQ-Vu-eCF" secondAttribute="bottom" constant="32" id="Gtw-my-4NP"/>
+                            <constraint firstItem="ncP-TH-4qD" firstAttribute="leading" secondItem="PaA-KF-Ad5" secondAttribute="trailing" constant="51" id="Les-pY-VW0"/>
+                            <constraint firstItem="iLW-YF-wHv" firstAttribute="trailing" secondItem="ymM-JR-fsI" secondAttribute="trailingMargin" id="Qno-FR-GUH"/>
+                            <constraint firstItem="BeE-6I-rCk" firstAttribute="top" secondItem="PaA-KF-Ad5" secondAttribute="bottom" constant="25" id="R1f-uC-2jK"/>
+                            <constraint firstItem="Rar-Jj-IxH" firstAttribute="top" secondItem="Yxx-vb-YVY" secondAttribute="bottom" constant="13" id="Rz7-vN-wgT"/>
+                            <constraint firstItem="qkQ-9W-D0Z" firstAttribute="leading" secondItem="BeE-6I-rCk" secondAttribute="trailing" constant="51" id="VmC-DG-l4A"/>
+                            <constraint firstItem="PoQ-Vu-eCF" firstAttribute="top" secondItem="qkQ-9W-D0Z" secondAttribute="bottom" constant="17" id="eGd-h7-EJm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7q1-H0-K9k" secondAttribute="trailing" constant="-16" id="eKL-ET-Zbr"/>
+                            <constraint firstItem="qkQ-9W-D0Z" firstAttribute="top" secondItem="ncP-TH-4qD" secondAttribute="bottom" constant="16" id="frA-FH-tBc"/>
+                            <constraint firstItem="iLW-YF-wHv" firstAttribute="top" secondItem="Yxx-vb-YVY" secondAttribute="bottom" constant="8" id="iHn-GC-FrM"/>
+                            <constraint firstItem="ncP-TH-4qD" firstAttribute="trailing" secondItem="ymM-JR-fsI" secondAttribute="trailingMargin" id="laR-qn-hoj"/>
+                            <constraint firstAttribute="centerX" secondItem="PoQ-Vu-eCF" secondAttribute="centerX" id="qFK-nG-bnL"/>
+                            <constraint firstItem="Rar-Jj-IxH" firstAttribute="leading" secondItem="ymM-JR-fsI" secondAttribute="leadingMargin" id="qbT-CL-9sq"/>
+                            <constraint firstItem="BeE-6I-rCk" firstAttribute="leading" secondItem="ymM-JR-fsI" secondAttribute="leadingMargin" id="qqr-8b-EWa"/>
+                            <constraint firstItem="qkQ-9W-D0Z" firstAttribute="trailing" secondItem="ymM-JR-fsI" secondAttribute="trailingMargin" id="rfn-n8-5Bk"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Lights" id="8za-xm-xkk"/>
+                    <connections>
+                        <outlet property="lightBrightness" destination="ncP-TH-4qD" id="xMQ-bx-r7R"/>
+                        <outlet property="lightPower" destination="iLW-YF-wHv" id="Mgv-2t-Fp2"/>
+                        <outlet property="lightTemp" destination="qkQ-9W-D0Z" id="gD6-Hy-iMq"/>
+                        <outlet property="mapView" destination="7q1-H0-K9k" id="EH3-K0-h31"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eoa-Zn-tVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,7 +166,6 @@
                     <connections>
                         <segue destination="2Nl-rf-pxi" kind="relationship" relationship="viewControllers" id="8zN-vE-7A4"/>
                         <segue destination="t44-Bb-iGb" kind="relationship" relationship="viewControllers" id="AW1-Ep-koc"/>
-                        <segue destination="SDK-wQ-sYZ" kind="relationship" relationship="viewControllers" id="55f-9p-XMZ"/>
                         <segue destination="ju0-AL-39Q" kind="relationship" relationship="viewControllers" id="cK7-OW-9nt"/>
                     </connections>
                 </tabBarController>
@@ -117,7 +185,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xEB-rA-w3U">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xEB-rA-w3U">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                             </mapView>
                         </subviews>
@@ -136,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPH-GL-DDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="607"/>
+            <point key="canvasLocation" x="1014" y="504"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iJx-4P-vQk">
@@ -168,7 +236,7 @@
             </objects>
             <point key="canvasLocation" x="1014" y="1405"/>
         </scene>
-        <!--iPad Notifications-->
+        <!--Notifications-->
         <scene sceneID="8zQ-4L-zLo">
             <objects>
                 <viewController id="SDe-Hi-epA" customClass="NotificationViewController" sceneMemberID="viewController">
@@ -198,7 +266,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="iPad Notifications" id="3tX-7n-BsA"/>
-                    <navigationItem key="navigationItem" id="zea-8S-pNG">
+                    <navigationItem key="navigationItem" title="Notifications" id="zea-8S-pNG">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="OxN-Ur-73r">
                             <connections>
                                 <action selector="composeAlert:" destination="SDe-Hi-epA" id="wJg-Ti-AdK"/>

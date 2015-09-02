@@ -885,7 +885,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             }
         }];
         
-        [self.notificationEntries addObject:ajnsNotification];
+        [self.notificationEntries insertObject:ajnsNotification atIndex:0];
         [self.notificationVC refreshTable];
     });
 }
